@@ -1,30 +1,32 @@
-package com.lic.epgs.commission.service;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.lic.epgs.commission.model.Commission;
-import com.lic.epgs.commission.repository.CommissionRepository;
-
 @Service
+@Transactional
 public class CommissionService {
 
     @Autowired
     private CommissionRepository commissionRepository;
 
-    public Commission findByCommissionIdAndCommissionDetailsId(String commissionId, Long commissionDetailsId){
-        return commissionRepository.findByCommissionIdAndCommissionDetailsId(commissionId, commissionDetailsId);
+    public Optional<Commission> findByCommissionDetailsId(Long commissionDetailsId) {
+        return commissionRepository.findByCommissionDetailsId(commissionDetailsId);
     }
 
-    public Commission save(Commission commission){
-        return commissionRepository.save(commission);
+    public int updateCommissionStatusAndWorkflowStatusByCommissionId(Long commissionId) {
+        return commissionRepository.updateCommissionStatusAndWorkflowStatusByCommissionId(commissionId);
     }
 
-    public Commission update(Commission commission){
-        return commissionRepository.update(commission);
+    public int deleteByCommissionDetailsIdIsNull() {
+        return commissionRepository.deleteByCommissionDetailsIdIsNull();
     }
 
-    public void addCommissionNotesAndQuestions(Commission commission){
-        commissionRepository.addCommissionNotesAndQuestions(commission);
+    public Optional<CommissionDetails> findCommissionDetailsByCommissionDetailsId(Long commissionDetailsId) {
+        return commissionRepository.findCommissionDetailsByCommissionDetailsId(commissionDetailsId);
+    }
+
+    public List<CommissionQuestionDetailsTemp> findCommissionQuestionDetailsTempByCommissionDetailsId(Long commissionDetailsId) {
+        return commissionRepository.findCommissionQuestionDetailsTempByCommissionDetailsId(commissionDetailsId);
+    }
+
+    public List<CommissionNotesTemp> findCommissionNotesTempByCommissionDetailsId(Long commissionDetailsId) {
+        return commissionRepository.findCommissionNotesTempByCommissionDetailsId(commissionDetailsId);
     }
 
 }
