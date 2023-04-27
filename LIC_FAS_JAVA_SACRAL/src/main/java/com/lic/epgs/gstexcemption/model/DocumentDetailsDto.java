@@ -1,25 +1,88 @@
+package com.lic.epgs.gstexcemption.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Entity
-@Table(name = "document_details")
+@Table(name = "document_details_14")
 public class DocumentDetailsDto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long documentId;
-
-    @Column
+    private Long id;
     private Long gstExemptionId;
+    private String documentName;
+    private String documentUrl;
+    private String createdBy;
+    private String updatedBy;
+    private Long createdDate;
+    private Long updatedDate;
 
-    @Column
-    private boolean existingCondition1;
+    public Long getId() {
+        return id;
+    }
 
-    @Column
-    private boolean existingCondition2;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    @Column
-    private Timestamp createdAt;
+    public Long getGstExemptionId() {
+        return gstExemptionId;
+    }
 
-    @Column
-    private Timestamp updatedAt;
+    public void setGstExemptionId(Long gstExemptionId) {
+        this.gstExemptionId = gstExemptionId;
+    }
 
-    // Getters and setters
-    // ...
+    public String getDocumentName() {
+        return documentName;
+    }
+
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
+    }
+
+    public String getDocumentUrl() {
+        return documentUrl;
+    }
+
+    public void setDocumentUrl(String documentUrl) {
+        this.documentUrl = documentUrl;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Long getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Long createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Long getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Long updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
 }
