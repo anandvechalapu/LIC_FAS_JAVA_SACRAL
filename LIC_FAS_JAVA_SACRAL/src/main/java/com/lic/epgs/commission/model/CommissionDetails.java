@@ -4,18 +4,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="commission_details")
 public class CommissionDetails {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String commissionName;
-    private Double commissionRate;
-    private Double commissionAmount;
+    private Long commission;
+
+    public CommissionDetails() {
+    }
+
+    public CommissionDetails(Long commission) {
+        this.commission = commission;
+    }
 
     public Long getId() {
         return id;
@@ -25,28 +28,12 @@ public class CommissionDetails {
         this.id = id;
     }
 
-    public String getCommissionName() {
-        return commissionName;
+    public Long getCommission() {
+        return commission;
     }
 
-    public void setCommissionName(String commissionName) {
-        this.commissionName = commissionName;
-    }
-
-    public Double getCommissionRate() {
-        return commissionRate;
-    }
-
-    public void setCommissionRate(Double commissionRate) {
-        this.commissionRate = commissionRate;
-    }
-
-    public Double getCommissionAmount() {
-        return commissionAmount;
-    }
-
-    public void setCommissionAmount(Double commissionAmount) {
-        this.commissionAmount = commissionAmount;
+    public void setCommission(Long commission) {
+        this.commission = commission;
     }
 
 }
