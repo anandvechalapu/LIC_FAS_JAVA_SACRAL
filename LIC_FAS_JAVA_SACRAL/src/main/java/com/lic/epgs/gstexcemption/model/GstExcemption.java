@@ -1,64 +1,50 @@
 package com.lic.epgs.gstexcemption.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "GST_EXCEMPTION")
 public class GstExcemption {
 
 	@Id
-	@Column(name = "PROPOSAL_NUMBER")
-	private String proposalNumber;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String loginUser;
+	private String unitCode;
+	private String gstExcemptionStatus;
 
-	@Column(name = "GST_POLICY_NUMBER")
-	private String gstPolicyNumber;
-
-	public GstExcemption() {
+	public Long getId() {
+		return id;
 	}
 
-	public GstExcemption(String proposalNumber, String gstPolicyNumber) {
-		this.proposalNumber = proposalNumber;
-		this.gstPolicyNumber = gstPolicyNumber;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getProposalNumber() {
-		return proposalNumber;
+	public String getLoginUser() {
+		return loginUser;
 	}
 
-	public void setProposalNumber(String proposalNumber) {
-		this.proposalNumber = proposalNumber;
+	public void setLoginUser(String loginUser) {
+		this.loginUser = loginUser;
 	}
 
-	public String getGstPolicyNumber() {
-		return gstPolicyNumber;
+	public String getUnitCode() {
+		return unitCode;
 	}
 
-	public void setGstPolicyNumber(String gstPolicyNumber) {
-		this.gstPolicyNumber = gstPolicyNumber;
+	public void setUnitCode(String unitCode) {
+		this.unitCode = unitCode;
 	}
 
-}
-
-public class GstPolicyNumberDto {
-
-	private String gstPolicyNumber;
-	
-	public GstPolicyNumberDto() {
-	}
-	
-	public GstPolicyNumberDto(String gstPolicyNumber) {
-		this.gstPolicyNumber = gstPolicyNumber;
-	}
-	
-	public String getGstPolicyNumber() {
-		return gstPolicyNumber;
+	public String getGstExcemptionStatus() {
+		return gstExcemptionStatus;
 	}
 
-	public void setGstPolicyNumber(String gstPolicyNumber) {
-		this.gstPolicyNumber = gstPolicyNumber;
+	public void setGstExcemptionStatus(String gstExcemptionStatus) {
+		this.gstExcemptionStatus = gstExcemptionStatus;
 	}
-	
+
 }
