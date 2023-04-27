@@ -1,12 +1,13 @@
+package com.lic.epgs.gstexcemption.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.lic.epgs.gstexcemption.model.GstExcemption;
+
 @Repository
-public interface GstExcemptionRepository {
-
-	/**
-	 * Retrieve the GST details of a policy based on its proposal number
-	 * 
-	 * @param proposalNumber the proposal number
-	 * @return GST policy details
-	 */
-	GstPolicyNumberDto getGstByProposalNo(String proposalNumber);
-
+public interface GstExcemptionRepository extends JpaRepository<GstExcemption, Long> {
+	List<GstExcemption> findByLoginUserAndUnitCode(String loginUser, String unitCode);
+	List<GstExcemption> findByGstExcemptionStatusAndUnitCode(String gstExcemptionStatus, String unitCode);
+	List<GstExcemption> findByUnitCode(String unitCode);
 }
