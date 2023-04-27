@@ -7,18 +7,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="commissions")
+@Table(name = "commission")
 public class Commission {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long commissionId;
+
     private Long commissionDetailsId;
 
-    private String commissionId;
-    private String commissionName;
-    private String commissionNotes;
-    private int commissionQuestions;
-    
+    private String commissionStatus;
+
+    private String workflowStatus;
+
+    public Long getCommissionId() {
+        return commissionId;
+    }
+
+    public void setCommissionId(Long commissionId) {
+        this.commissionId = commissionId;
+    }
+
     public Long getCommissionDetailsId() {
         return commissionDetailsId;
     }
@@ -27,36 +36,20 @@ public class Commission {
         this.commissionDetailsId = commissionDetailsId;
     }
 
-    public String getCommissionId() {
-        return commissionId;
+    public String getCommissionStatus() {
+        return commissionStatus;
     }
 
-    public void setCommissionId(String commissionId) {
-        this.commissionId = commissionId;
+    public void setCommissionStatus(String commissionStatus) {
+        this.commissionStatus = commissionStatus;
     }
 
-    public String getCommissionName() {
-        return commissionName;
+    public String getWorkflowStatus() {
+        return workflowStatus;
     }
 
-    public void setCommissionName(String commissionName) {
-        this.commissionName = commissionName;
-    }
-
-    public String getCommissionNotes() {
-        return commissionNotes;
-    }
-
-    public void setCommissionNotes(String commissionNotes) {
-        this.commissionNotes = commissionNotes;
-    }
-
-    public int getCommissionQuestions() {
-        return commissionQuestions;
-    }
-
-    public void setCommissionQuestions(int commissionQuestions) {
-        this.commissionQuestions = commissionQuestions;
+    public void setWorkflowStatus(String workflowStatus) {
+        this.workflowStatus = workflowStatus;
     }
 
 }
