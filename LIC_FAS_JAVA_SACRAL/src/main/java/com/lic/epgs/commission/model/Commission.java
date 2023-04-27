@@ -1,25 +1,36 @@
 @Entity
-@Table(name = "commission")
+@Table(name="commission")
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"createdOn", "modifiedOn"}, 
+        allowGetters = true)
 public class Commission implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(name = "status")
+    private Long commissionId;
+
+    @NotBlank
     private String status;
-    
-    @Column(name = "workflow_status")
+
+    @NotBlank
     private String workflowStatus;
-    
-    @Column(name = "modified_by")
+
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createdOn;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    private Date modifiedOn;
+
+    @Column(nullable = false)
     private String modifiedBy;
     
-    @Column(name = "modified_on")
-    private LocalDateTime modifiedOn;
+    @Column(nullable = false)
+    private Boolean isActive;
     
-    // getters and setters
+    //Getters and Setters
 
 }
