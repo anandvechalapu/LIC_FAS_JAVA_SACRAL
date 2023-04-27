@@ -1,26 +1,30 @@
+package com.lic.epgs.gstexcemption.repository;
+
+import com.lic.epgs.gstexcemption.dto.GstExcemptionDto;
+import com.lic.epgs.gstexcemption.dto.GSTResponseDto;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface GstAllDetailsByGstId9GstExcemptionRepository extends JpaRepository<GstExcemptionDto, Long> {
+    GSTResponseDto<GstExcemptionDto> getAllDetailsByGstId(Long gstExcemptionId);
+}
+
 package com.lic.epgs.gstexcemption.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lic.epgs.gstexcemption.dto.GstPolicyNumberDto;
-import com.lic.epgs.gstexcemption.service.GstExcemptionService;
+import com.lic.epgs.gstexcemption.dto.GstExcemptionDto;
+import com.lic.epgs.gstexcemption.dto.GSTResponseDto;
+import com.lic.epgs.gstexcemption.service.GstAllDetailsByGstId9GstExcemptionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/gst-excemption")
+@RequestMapping("/gstexcemption")
 public class GstExcemptionController {
 
-	private final GstExcemptionService gstExcemptionService;
-	
-	public GstExcemptionController(GstExcemptionService gstExcemptionService) {
-		this.gstExcemptionService = gstExcemptionService;
-	}
-	
-	@GetMapping("/{proposalNumber}")
-	public GstPolicyNumberDto getGstByProposalNo(@PathVariable String proposalNumber) {
-		return gstExcemptionService.getGstByProposalNo(proposalNumber);
-	}
+    @Autowired
+    private GstAllDetailsByGstId9GstExcemptionService gstAllDetailsByGstId9GstExcemptionService;
 
+    @GetMapping("/details/{gstExcemptionId}")
+    public GSTResponseDto<GstExcemptionDto> getAllDetailsByGstId(@PathVariable("gstExcemptionId") Long gstExcemptionId) {
+        return gstAllDetailsByGstId9GstExcemptionService.getAllDetailsByGstId(gstExcemptionId);
+    }
 }
