@@ -1,41 +1,64 @@
-@Repository
-public interface SendToChecker4GstExcemptionRepository extends JpaRepository<GstExcemption, Long> {
-    @Modifying
-    @Query(value = "UPDATE gst_excemption SET status = :status, workflow_status = :workflowStatus WHERE id = :id", nativeQuery = true)
-    int updateGstExcemption(@Param("id") Long id, @Param("status") String status, @Param("workflowStatus") String workflowStatus);
-    
-    @Query(value = "SELECT * FROM gst_excemption WHERE id = :id", nativeQuery = true)
-    Optional<GstExcemption> findById(@Param("id") Long id);
-}
-
-// Spring Boot Controller Class
 package com.lic.epgs.gstexcemption.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lic.epgs.gstexcemption.model.GstExcemption;
-import com.lic.epgs.gstexcemption.service.SendToChecker4GstExcemptionService;
+import com.lic.epgs.gstexcemption.service.GstExcemptionService;
 
 @RestController
-@RequestMapping("/gstexcemption")
+@RequestMapping("/gstexcemptions")
 public class GstExcemptionController {
-    
-    @Autowired
-    private SendToChecker4GstExcemptionService sendToChecker4GstExcemptionService;
-    
-    @PutMapping("/update")
-    public int updateGstExcemption(@RequestBody GstExcemption gstExcemption) {
-        return sendToChecker4GstExcemptionService.updateGstExcemption(gstExcemption.getId(), gstExcemption.getStatus(), gstExcemption.getWorkflowStatus());
-    }
-    
-    @GetMapping("/{id}")
-    public Optional<GstExcemption> getGstExcemption(@PathVariable Long id) {
-        return sendToChecker4GstExcemptionService.findById(id);
-    }
+
+	@Autowired
+	private GstExcemptionService gstExcemptionService;
+	
+	@GetMapping
+	public List<GstExcemption> getAllGstExcemptions() {
+		return gstExcemptionService.getAllGstExcemptions();
+	}
+	
+	@GetMapping("/{gstExcemptionId}")
+	public GstExcemption getGstExcemptionById(@PathVariable("gstExcemptionId") Long gstExcemptionId) {
+		return gstExcemptionService.getGstExcemptionById(gstExcemptionId);
+	}
+	
+	@PostMapping
+	public GstExcemption createGstExcemption(@RequestBody GstExcemption gstExcemption) {
+		return gstExcemptionService.createGstExcemption(gstExcemption);
+	}
+	
+	@PutMapping
+	public GstExcemption updateGstExcemption(@RequestBody GstExcemption gstExcemption) {
+		return gstExcemptionService.updateGstExcemption(gstExcemption);
+	}
+	
+	@DeleteMapping("/{gstExcemptionId}")
+	public void deleteGstExcemptionById(@PathVariable("gstExcemptionId") Long gstExcemptionId) {
+		gstExcemptionService.deleteGstExcemptionById(gstExcemptionId);
+	}
+	
+	@GetMapping("/modifiedBy/{modifiedBy}")
+	public GstExcemption getGstExcemptionByModifiedBy(@PathVariable("modifiedBy") String modifiedBy) {
+		return gstExcemptionService.getGstExcemptionByModifiedBy(modifiedBy);
+	}
+	
+	@GetMapping("/gstExcemptionStatus/{gstExcemptionStatus}")
+	public GstExcemption getGstExcemptionByGstExcemptionStatus(@PathVariable("gstExcemptionStatus") String gstExcemptionStatus) {
+		return gstExcemptionService.getGstExcemptionByGstExcemptionStatus(gstExcemptionStatus);
+	}
+	
+	@GetMapping("/workflowStatus/{workflowStatus}")
+	public GstExcemption getGstExcemptionByWorkflowStatus(@PathVariable("workflowStatus") String workflowStatus) {
+		return gstExcemptionService.getGstExcemptionByWorkflowStatus(workflowStatus);
+	}
 }
