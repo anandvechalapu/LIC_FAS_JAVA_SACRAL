@@ -1,46 +1,41 @@
-// Entity/Model class
-package com.lic.epgs.gstexcemption.model;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 @Entity
-@Table(name = "gst_excemption")
-public class GstExcemption {
-
+@Table(name="gst_excemption")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class GstExcemption implements Serializable  {
+ 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String status;
-    private String workflowStatus;
-    
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getWorkflowStatus() {
-        return workflowStatus;
-    }
-
-    public void setWorkflowStatus(String workflowStatus) {
-        this.workflowStatus = workflowStatus;
-    }
-
+    @Column(name = "gst_excemption_id")
+    private Long gstExcemptionId;
+ 
+    @Column(name = "gst_excemption_status")
+    private String gstExcemptionStatus;
+ 
+    @Column(name = "created_by")
+    private Long createdBy;
+ 
+    @Column(name = "modified_by")
+    private Long modifiedBy;
+ 
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+ 
+    @Column(name = "modified_date")
+    @LastModifiedDate
+    private LocalDateTime modifiedDate;
+ 
+    @Column(name = "work_flow_status")
+    private String workFlowStatus;
+ 
+    @Column(name = "rejection_remarks")
+    private String rejectionRemarks;
+ 
+    @OneToMany(mappedBy="gstExcemption",cascade=CascadeType.ALL,orphanRemoval=true)
+    private List<GstExcemptionNote> gstExcemptionNote;
+ 
+    @OneToMany(mappedBy="gstExcemption",cascade=CascadeType.ALL,orphanRemoval=true)
+    private List<GstExcemptionDocument> gstExcemptionDocument;
+ 
 }
