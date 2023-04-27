@@ -1,136 +1,62 @@
 package com.lic.epgs.commission.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "commission")
+@Table(name="commissions")
 public class Commission {
 
-  @Id
-  private Long commissionId;
-  private String status;
-  private String role;
-  
-  public Long getCommissionId() {
-    return commissionId;
-  }
-  
-  public void setCommissionId(Long commissionId) {
-    this.commissionId = commissionId;
-  }
-  
-  public String getStatus() {
-    return status;
-  }
-  
-  public void setStatus(String status) {
-    this.status = status;
-  }
-  
-  public String getRole() {
-    return role;
-  }
-  
-  public void setRole(String role) {
-    this.role = role;
-  }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long commissionDetailsId;
 
-}
+    private String commissionId;
+    private String commissionName;
+    private String commissionNotes;
+    private int commissionQuestions;
+    
+    public Long getCommissionDetailsId() {
+        return commissionDetailsId;
+    }
 
-package com.lic.epgs.commission.model;
+    public void setCommissionDetailsId(Long commissionDetailsId) {
+        this.commissionDetailsId = commissionDetailsId;
+    }
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+    public String getCommissionId() {
+        return commissionId;
+    }
 
-@Entity
-@Table(name = "commission_temp")
-public class CommissionTemp {
+    public void setCommissionId(String commissionId) {
+        this.commissionId = commissionId;
+    }
 
-  @Id
-  private Long commissionId;
-  private String status;
-  
-  public Long getCommissionId() {
-    return commissionId;
-  }
-  
-  public void setCommissionId(Long commissionId) {
-    this.commissionId = commissionId;
-  }
-  
-  public String getStatus() {
-    return status;
-  }
-  
-  public void setStatus(String status) {
-    this.status = status;
-  }
+    public String getCommissionName() {
+        return commissionName;
+    }
 
-}
+    public void setCommissionName(String commissionName) {
+        this.commissionName = commissionName;
+    }
 
-package com.lic.epgs.commission.model;
+    public String getCommissionNotes() {
+        return commissionNotes;
+    }
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+    public void setCommissionNotes(String commissionNotes) {
+        this.commissionNotes = commissionNotes;
+    }
 
-@Entity
-@Table(name = "commission_notes")
-public class CommissionNotes {
+    public int getCommissionQuestions() {
+        return commissionQuestions;
+    }
 
-  @Id
-  private Long commissionId;
-  private String notes;
-  
-  public Long getCommissionId() {
-    return commissionId;
-  }
-  
-  public void setCommissionId(Long commissionId) {
-    this.commissionId = commissionId;
-  }
-  
-  public String getNotes() {
-    return notes;
-  }
-  
-  public void setNotes(String notes) {
-    this.notes = notes;
-  }
-
-}
-
-package com.lic.epgs.commission.model;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "commission_questions")
-public class CommissionQuestion {
-
-  @Id
-  private Long commissionId;
-  private String question;
-  
-  public Long getCommissionId() {
-    return commissionId;
-  }
-  
-  public void setCommissionId(Long commissionId) {
-    this.commissionId = commissionId;
-  }
-  
-  public String getQuestion() {
-    return question;
-  }
-  
-  public void setQuestion(String question) {
-    this.question = question;
-  }
+    public void setCommissionQuestions(int commissionQuestions) {
+        this.commissionQuestions = commissionQuestions;
+    }
 
 }
