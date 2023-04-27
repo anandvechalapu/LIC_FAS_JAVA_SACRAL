@@ -11,94 +11,94 @@ import javax.persistence.Table;
 @Table(name = "stamp_duty")
 public class StampDuty {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-	@Column(name = "challan_grn_no")
-	private String challanGrnNo;
+    @Column(name = "challan_grn_no")
+    private String challanGrnNo;
 
-	@Column(name = "challan_grn_date")
-	private String challanGrnDate;
+    @Column(name = "challan_grn_date")
+    private String challanGrnDate;
 
-	@Column(name = "role_type")
-	private String roleType;
+    @Column(name = "modified_date")
+    private String modifiedDate;
 
-	@Column(name = "stamp_duty_status")
-	private String stampDutyStatus;
+    @Column(name = "role_type")
+    private String roleType;
 
-	@Column(name = "unit_office_code")
-	private String unitOfficeCode;
+    @Column(name = "stamp_duty_status")
+    private String stampDutyStatus;
 
-	@Column(name = "active")
-	private Boolean active;
+    @Column(name = "unit_office_code")
+    private String unitOfficeCode;
 
-	@Column(name = "modified_date")
-	private String modifiedDate;
+    @Column(name = "active")
+    private Boolean active;
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getChallanGrnNo() {
-		return challanGrnNo;
-	}
+    public String getChallanGrnNo() {
+        return challanGrnNo;
+    }
 
-	public void setChallanGrnNo(String challanGrnNo) {
-		this.challanGrnNo = challanGrnNo;
-	}
+    public void setChallanGrnNo(String challanGrnNo) {
+        this.challanGrnNo = challanGrnNo;
+    }
 
-	public String getChallanGrnDate() {
-		return challanGrnDate;
-	}
+    public String getChallanGrnDate() {
+        return challanGrnDate;
+    }
 
-	public void setChallanGrnDate(String challanGrnDate) {
-		this.challanGrnDate = challanGrnDate;
-	}
+    public void setChallanGrnDate(String challanGrnDate) {
+        this.challanGrnDate = challanGrnDate;
+    }
 
-	public String getRoleType() {
-		return roleType;
-	}
+    public String getModifiedDate() {
+        return modifiedDate;
+    }
 
-	public void setRoleType(String roleType) {
-		this.roleType = roleType;
-	}
+    public void setModifiedDate(String modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
 
-	public String getStampDutyStatus() {
-		return stampDutyStatus;
-	}
+    public String getRoleType() {
+        return roleType;
+    }
 
-	public void setStampDutyStatus(String stampDutyStatus) {
-		this.stampDutyStatus = stampDutyStatus;
-	}
+    public void setRoleType(String roleType) {
+        this.roleType = roleType;
+    }
 
-	public String getUnitOfficeCode() {
-		return unitOfficeCode;
-	}
+    public String getStampDutyStatus() {
+        return stampDutyStatus;
+    }
 
-	public void setUnitOfficeCode(String unitOfficeCode) {
-		this.unitOfficeCode = unitOfficeCode;
-	}
+    public void setStampDutyStatus(String stampDutyStatus) {
+        this.stampDutyStatus = stampDutyStatus;
+    }
 
-	public Boolean getActive() {
-		return active;
-	}
+    public String getUnitOfficeCode() {
+        return unitOfficeCode;
+    }
 
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
+    public void setUnitOfficeCode(String unitOfficeCode) {
+        this.unitOfficeCode = unitOfficeCode;
+    }
 
-	public String getModifiedDate() {
-		return modifiedDate;
-	}
+    public Boolean getActive() {
+        return active;
+    }
 
-	public void setModifiedDate(String modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
 }
