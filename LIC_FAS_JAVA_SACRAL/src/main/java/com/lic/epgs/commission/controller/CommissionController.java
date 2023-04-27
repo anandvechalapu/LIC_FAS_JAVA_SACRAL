@@ -1,56 +1,23 @@
 package com.lic.epgs.commission.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lic.epgs.commission.model.Commission;
-import com.lic.epgs.commission.model.CommissionDetails;
-import com.lic.epgs.commission.model.CommissionNotesTemp;
-import com.lic.epgs.commission.model.CommissionQuestionDetailsTemp;
-import com.lic.epgs.commission.service.CommissionService;
-
-import java.util.List;
-import java.util.Optional;
+import com.lic.epgs.commission.service.SendToChecker13CommissionService;
 
 @RestController
-@RequestMapping("/commission")
 public class CommissionController {
-
+    
     @Autowired
-    private CommissionService commissionService;
-
-    @GetMapping("/{commissionDetailsId}")
-    public Optional<Commission> findByCommissionDetailsId(@PathVariable Long commissionDetailsId) {
-        return commissionService.findByCommissionDetailsId(commissionDetailsId);
-    }
-
-    @PutMapping("/{commissionId}")
-    public int updateCommissionStatusAndWorkflowStatusByCommissionId(@PathVariable Long commissionId) {
-        return commissionService.updateCommissionStatusAndWorkflowStatusByCommissionId(commissionId);
-    }
-
-    @GetMapping("/deleteByCommissionDetailsIdIsNull")
-    public int deleteByCommissionDetailsIdIsNull() {
-        return commissionService.deleteByCommissionDetailsIdIsNull();
-    }
-
-    @GetMapping("/findCommissionDetailsByCommissionDetailsId/{commissionDetailsId}")
-    public Optional<CommissionDetails> findCommissionDetailsByCommissionDetailsId(@PathVariable Long commissionDetailsId) {
-        return commissionService.findCommissionDetailsByCommissionDetailsId(commissionDetailsId);
-    }
-
-    @GetMapping("/findCommissionQuestionDetailsTempByCommissionDetailsId/{commissionDetailsId}")
-    public List<CommissionQuestionDetailsTemp> findCommissionQuestionDetailsTempByCommissionDetailsId(@PathVariable Long commissionDetailsId) {
-        return commissionService.findCommissionQuestionDetailsTempByCommissionDetailsId(commissionDetailsId);
-    }
-
-    @GetMapping("/findCommissionNotesTempByCommissionDetailsId/{commissionDetailsId}")
-    public List<CommissionNotesTemp> findCommissionNotesTempByCommissionDetailsId(@PathVariable Long commissionDetailsId) {
-        return commissionService.findCommissionNotesTempByCommissionDetailsId(commissionDetailsId);
+    private SendToChecker13CommissionService sendToChecker13CommissionService;
+    
+    @PostMapping("/commission/sendToChecker")
+    public int sendToChecker(@RequestParam String status, @RequestParam String workflowStatus, @RequestParam String modifiedBy, @RequestParam LocalDateTime modifiedOn, @RequestParam Long id) {
+        return sendToChecker13CommissionService.sendToChecker(status, workflowStatus, modifiedBy, modifiedOn, id);
     }
 
 }
