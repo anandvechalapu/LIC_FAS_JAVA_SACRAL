@@ -1,50 +1,49 @@
 package com.lic.epgs.gstexcemption.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "gst_excemption")
 public class GstExcemption {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private String loginUser;
-	private String unitCode;
-	private String gstExcemptionStatus;
+    private String gstNo;
+    private String unitCode;
+    private String proposalNo;
+    private List<GstExcemptionDto> gstExcemptionDto;
 
-	public Long getId() {
-		return id;
-	}
+    public String getGstNo() {
+        return gstNo;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setGstNo(String gstNo) {
+        this.gstNo = gstNo;
+    }
 
-	public String getLoginUser() {
-		return loginUser;
-	}
+    public String getUnitCode() {
+        return unitCode;
+    }
 
-	public void setLoginUser(String loginUser) {
-		this.loginUser = loginUser;
-	}
+    public void setUnitCode(String unitCode) {
+        this.unitCode = unitCode;
+    }
 
-	public String getUnitCode() {
-		return unitCode;
-	}
+    public String getProposalNo() {
+        return proposalNo;
+    }
 
-	public void setUnitCode(String unitCode) {
-		this.unitCode = unitCode;
-	}
+    public void setProposalNo(String proposalNo) {
+        this.proposalNo = proposalNo;
+    }
 
-	public String getGstExcemptionStatus() {
-		return gstExcemptionStatus;
-	}
+    public List<GstExcemptionDto> getGstExcemptionDto() {
+        return gstExcemptionDto;
+    }
 
-	public void setGstExcemptionStatus(String gstExcemptionStatus) {
-		this.gstExcemptionStatus = gstExcemptionStatus;
-	}
+    public void setGstExcemptionDto(List<GstExcemptionDto> gstExcemptionDto) {
+        this.gstExcemptionDto = gstExcemptionDto;
+    }
 
 }
