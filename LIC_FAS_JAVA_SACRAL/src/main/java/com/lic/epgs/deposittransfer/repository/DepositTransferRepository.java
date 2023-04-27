@@ -1,21 +1,36 @@
-@Repository
-public interface DepositTransferRepository extends JpaRepository<DepositTransferTempEntity, Long> {
+package com.lic.epgs.deposittransfer.repository;
 
-    ApiResponseDto saveDepositTransfer(DepositTransferDto depositTransferDto);
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
-    @Modifying
-    @Transactional
-    @Query("update DepositTransferTempEntity d set d.isActive = false, d.referenceNumber = :referenceNumber where d.transferId = :transferId")
-    void updateDepositTransferTempEntity(@Param("referenceNumber") String referenceNumber, @Param("transferId") String transferId);
+import com.lic.epgs.deposittransfer.model.DepositTransfer;
 
-    Optional<String> getDepositSeq();
+public interface DepositTransferRepository extends JpaRepository<DepositTransfer, Long> {
+	
+	@Transactional
+	@Modifying
+	@Query("update DepositTransfer dt set dt.transferStatus = ?2, dt.workFlowStatus = ?3 where dt.transferId = ?1")
+	public int updateTransferStatus(Long transferId, String transferStatus, String workFlowStatus);
+	
+	@Transactional
+	@Modifying
+	@Query("update DepositTransfer dt set dt.isActive = false where dt.transferId = ?1")
+	public int setOldTransferInactive(Long transferId);
+	
+	@Transactional
+	@Modifying
+	@Query("update DepositTransferNotes dtn set dtn.isActive = false where dtn.depositTransfer.transferId = ?1")
+	public int setOldTransferNotesInactive(Long transferId);
+	
+	@Transactional
+	@Modifying
+	@Query("update DepositTransferNotes dtn set dtn.isActive = true, dtn.transferNotes = ?2 where dtn.depositTransfer.transferId = ?1")
+	public int updateTransferNotes(Long transferId, String transferNotes);
+	
+	public DepositTransfer findByTransferId(Long transferId);
+	
+	public DepositTransfer findByTransferIdAndIsActiveTrue(Long transferId);
 
-    @Transactional
-    @Modifying
-    @Query("update DepositTransferTempEntity d set d.transferStatus = :transferStatus, d.workflowStatus = :workflowStatus where d.transferId = :transferId")
-    void updateDepositTransferStatus(@Param("transferStatus") int transferStatus, @Param("workflowStatus") int workflowStatus, @Param("transferId") String transferId);
-
-    @Transactional
-    @Modifying
-    void saveDepositTransferNotes(DepositTransferNotesTempEntity depositTransferNotesTempEntity);
 }
