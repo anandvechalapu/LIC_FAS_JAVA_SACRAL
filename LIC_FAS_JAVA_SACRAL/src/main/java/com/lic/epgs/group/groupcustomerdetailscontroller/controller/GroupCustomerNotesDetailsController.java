@@ -14,19 +14,13 @@ import com.lic.epgs.group.groupcustomerdetailscontroller.service.GroupCustomerNo
 @RestController
 public class GroupCustomerNotesDetailsController {
 
-    @Autowired
-    private GroupCustomerNotesDetailsService groupCustomerNotesDetailsService;
+	@Autowired
+	private GroupCustomerNotesDetailsService groupCustomerNotesDetailsService;
 
-    @GetMapping("/groupcustomer/{groupCustomerId}/notes")
-    public List<GroupCustomerNotesDetails> getGroupCustomerNotesDetailsByGroupCustomerId(@PathVariable Long groupCustomerId) {
-        return groupCustomerNotesDetailsService.getGroupCustomerNotesDetailsByGroupCustomerId(groupCustomerId);
-    }
-
-    @GetMapping("/groupcustomer/{groupCustomerId}/notes/daterange")
-    public GroupCustomerNotesDetails getGroupCustomerNotesDetailsByGroupCustomerIdAndDateRange(@PathVariable Long groupCustomerId,
-                                                                                              @RequestParam(name = "startDate") String startDate,
-                                                                                              @RequestParam(name = "endDate") String endDate) {
-        return groupCustomerNotesDetailsService.getGroupCustomerNotesDetailsByGroupCustomerIdAndDateRange(groupCustomerId, startDate, endDate);
-    }
+	@GetMapping("/group-customer-notes-details/{groupCustomerId}")
+	public List<GroupCustomerNotesDetails> getGroupCustomerNotesByGroupCustomerId(@PathVariable Long groupCustomerId, @RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate) {
+		return groupCustomerNotesDetailsService.getGroupCustomerNotesByGroupCustomerIdAndDateRange(groupCustomerId, startDate, endDate);
+	}
 
 }
