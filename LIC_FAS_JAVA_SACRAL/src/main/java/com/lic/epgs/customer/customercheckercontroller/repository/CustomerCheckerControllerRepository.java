@@ -1,27 +1,24 @@
 package com.lic.epgs.customer.customercheckercontroller.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import java.util.UUID;
+
+import com.lic.epgs.customer.customercheckercontroller.model.Customer;
 
 @Repository
-public interface CustomerCheckerControllerRepository extends JpaRepository<CustomerCheckerController, UUID> {
+public interface CustomerCheckerControllerRepository extends JpaRepository<Customer, Long> {
 
-  @Query("SELECT c FROM CustomerCheckerController c WHERE c.approved = true")
-  CustomerCheckerController findApprovedCustomer();
+    @Query("SELECT c FROM Customer c WHERE c.customerId = ?1")
+    Customer findByCustomerId(Long customerId);
 
-  @Modifying
-  @Query("UPDATE CustomerCheckerController c SET c.approved = true WHERE c.id = :id")
-  void approveCustomerById(UUID id);
+    @Query("SELECT c FROM Customer c WHERE c.customerId = ?1 AND c.trustCode = ?2")
+    Customer findByCustomerIdAndTrustCode(Long customerId, String trustCode);
 
-  @Modifying
-  @Query("UPDATE CustomerCheckerController c SET c.status = 'inactive' WHERE c.id = :id")
-  void setCustomerInactive(UUID id);
+    @Query("SELECT c FROM Customer c WHERE c.customerId = ?1 AND c.trustName = ?2")
+    Customer findByCustomerIdAndTrustName(Long customerId, String trustName);
 
-  @Modifying
-  @Query("UPDATE CustomerCheckerController c SET c.address = :address, c.contactDetails = :contactDetails, c.migrationData = :migrationData WHERE c.id = :id")
-  void updateCustomerData(UUID id, String address, String contactDetails, String migrationData);
+    @Query("SELECT c FROM Customer c WHERE c.customerId = ?1 AND c.trustCode = ?2 AND c.trustName = ?3")
+    Customer findByCustomerIdAndTrustCodeAndTrustName(Long customerId, String trustCode, String trustName);
 
 }
