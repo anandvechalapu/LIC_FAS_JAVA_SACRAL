@@ -4,40 +4,42 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="customer")
 public class Customer {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long customerId;
+	
+	private String customerName;
+	
+	private boolean isActive;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerId;
+	public Long getCustomerId() {
+		return customerId;
+	}
 
-    private String trustCode;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
 
-    private String trustName;
+	public String getCustomerName() {
+		return customerName;
+	}
 
-    public Long getCustomerId() {
-        return customerId;
-    }
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
+	public boolean isActive() {
+		return isActive;
+	}
 
-    public String getTrustCode() {
-        return trustCode;
-    }
-
-    public void setTrustCode(String trustCode) {
-        this.trustCode = trustCode;
-    }
-
-    public String getTrustName() {
-        return trustName;
-    }
-
-    public void setTrustName(String trustName) {
-        this.trustName = trustName;
-    }
-
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
 }
