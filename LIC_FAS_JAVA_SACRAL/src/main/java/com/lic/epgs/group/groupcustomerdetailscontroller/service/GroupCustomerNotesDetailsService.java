@@ -13,10 +13,13 @@ public class GroupCustomerNotesDetailsService {
 
     @Autowired
     private GroupCustomerNotesDetailsRepository groupCustomerNotesDetailsRepository;
-    
-    public List<GroupCustomerNotesDetails> findByGroupCustomerIdAndDateRange(Long groupCustomerId, 
-                                                                            String startDate, 
-                                                                            String endDate) {
-        return groupCustomerNotesDetailsRepository.findByGroupCustomerIdAndDateRange(groupCustomerId, startDate, endDate);
+
+    public List<GroupCustomerNotesDetails> getGroupCustomerNotesDetailsByGroupCustomerId(Long groupCustomerId) {
+        return groupCustomerNotesDetailsRepository.findByGroupCustomerId(groupCustomerId);
     }
+
+    public GroupCustomerNotesDetails getGroupCustomerNotesDetailsByGroupCustomerIdAndDateRange(Long groupCustomerId, String startDate, String endDate) {
+        return groupCustomerNotesDetailsRepository.getGroupCustomerNotesDetailsByGroupCustomerIdAndDateRange(groupCustomerId, startDate, endDate);
+    }
+
 }
