@@ -11,15 +11,15 @@ import com.lic.epgs.group.groupcustomerdetailscontroller.repository.GroupCustome
 @Service
 public class GroupCustomerNotesDetailsService {
 
-    @Autowired
-    private GroupCustomerNotesDetailsRepository groupCustomerNotesDetailsRepository;
+	@Autowired
+	private GroupCustomerNotesDetailsRepository groupCustomerNotesDetailsRepository;
 
-    public List<GroupCustomerNotesDetails> getGroupCustomerNotesDetailsByGroupCustomerId(Long groupCustomerId) {
-        return groupCustomerNotesDetailsRepository.findByGroupCustomerId(groupCustomerId);
-    }
+	public GroupCustomerNotesDetails save(GroupCustomerNotesDetails groupCustomerNotesDetails) {
+		return groupCustomerNotesDetailsRepository.save(groupCustomerNotesDetails);
+	}
 
-    public GroupCustomerNotesDetails getGroupCustomerNotesDetailsByGroupCustomerIdAndDateRange(Long groupCustomerId, String startDate, String endDate) {
-        return groupCustomerNotesDetailsRepository.getGroupCustomerNotesDetailsByGroupCustomerIdAndDateRange(groupCustomerId, startDate, endDate);
-    }
+	public List<GroupCustomerNotesDetails> getGroupCustomerNotesByGroupCustomerIdAndDateRange(Long groupCustomerId, String startDate, String endDate) {
+		return groupCustomerNotesDetailsRepository.findByGroupCustomerIdAndDateRange(groupCustomerId, startDate, endDate);
+	}
 
 }
