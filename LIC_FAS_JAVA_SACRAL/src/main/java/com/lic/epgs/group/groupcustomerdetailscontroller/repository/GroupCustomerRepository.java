@@ -7,14 +7,23 @@ import com.lic.epgs.group.groupcustomerdetailscontroller.model.GroupCustomer;
 
 @Repository
 public interface GroupCustomerRepository extends JpaRepository<GroupCustomer, Long> {
- 
-    GroupCustomer findByGroupCustomerId(Long groupCustomerId);
-    
-    List<GroupCustomer> findByStatus(String status);
-    
-    List<GroupCustomer> findByGroupCustomerIdAndStatus(Long groupCustomerId, String status);
-    
-    void deleteByGroupCustomerIdAndStatus(Long groupCustomerId, String status);
-    
-    void deleteByGroupCustomerId(Long groupCustomerId);
+	
+	//method to update group customer details
+	GroupCustomer updateGroupCustomerDetails(GroupCustomer groupCustomer);
+	
+	//method to update group customer history
+	GroupCustomer updateGroupCustomerHistory(GroupCustomer groupCustomer);
+	
+	//method to update group customer temporary details
+	GroupCustomer updateGroupCustomerTemporaryDetails(GroupCustomer groupCustomer);
+	
+	//method to update status flag, modified by and modified on of the group customer
+	GroupCustomer updateGroupCustomerStatusModifiedByModifiedOn(GroupCustomer groupCustomer);
+	
+	//method to update defunct and active flags of the group customer
+	GroupCustomer updateGroupCustomerDefunctActiveFlag(GroupCustomer groupCustomer);
+	
+	//method to update related details of the group customer
+	GroupCustomer updateGroupCustomerRelatedDetails(GroupCustomer groupCustomer);
+
 }
