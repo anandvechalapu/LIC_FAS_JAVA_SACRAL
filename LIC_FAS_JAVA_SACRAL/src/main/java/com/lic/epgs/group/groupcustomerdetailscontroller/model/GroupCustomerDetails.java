@@ -1,44 +1,59 @@
 package com.lic.epgs.group.groupcustomerdetailscontroller.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "group_customer_details")
 public class GroupCustomerDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long groupCustomerId;
-    private Long contactId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "group_customer_id")
+  private Long groupCustomerId;
 
-    public GroupCustomerDetails(){
-    }
+  @Column(name = "customer_id")
+  private Long customerId;
 
-    public Long getId() {
-        return id;
-    }
+  @Column(name = "group_id")
+  private Long groupId;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  @Column(name = "is_active")
+  private Boolean isActive;
 
-    public Long getGroupCustomerId() {
-        return groupCustomerId;
-    }
+  public Long getGroupCustomerId() {
+    return groupCustomerId;
+  }
 
-    public void setGroupCustomerId(Long groupCustomerId) {
-        this.groupCustomerId = groupCustomerId;
-    }
+  public void setGroupCustomerId(Long groupCustomerId) {
+    this.groupCustomerId = groupCustomerId;
+  }
 
-    public Long getContactId() {
-        return contactId;
-    }
+  public Long getCustomerId() {
+    return customerId;
+  }
 
-    public void setContactId(Long contactId) {
-        this.contactId = contactId;
-    }
+  public void setCustomerId(Long customerId) {
+    this.customerId = customerId;
+  }
 
+  public Long getGroupId() {
+    return groupId;
+  }
+
+  public void setGroupId(Long groupId) {
+    this.groupId = groupId;
+  }
+
+  public Boolean getIsActive() {
+    return isActive;
+  }
+
+  public void setIsActive(Boolean isActive) {
+    this.isActive = isActive;
+  }
 }
