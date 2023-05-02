@@ -1,0 +1,7 @@
+@Repository
+public interface SendToCheckerGroupCustomerCheckerController4Repository extends JpaRepository<SendToCheckerGroupCustomerCheckerController4, Long> {
+    void save(SendToCheckerGroupCustomerCheckerController4 sendToCheckerGroupCustomerCheckerController4);
+    void delete(SendToCheckerGroupCustomerCheckerController4 sendToCheckerGroupCustomerCheckerController4);
+    void validateAndSave(SendToCheckerGroupCustomerCheckerController4 sendToCheckerGroupCustomerCheckerController4);
+    void updateAllRelatedTables(SendToCheckerGroupCustomerCheckerController4 sendToCheckerGroupCustomerCheckerController4);
+}
