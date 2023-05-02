@@ -8,57 +8,47 @@ import javax.persistence.Id;
 @Entity
 public class GroupCustomerDetailsController {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
-	private String groupName;
-	
-	private String customerName;
-	
-	private String customerNumber;
-	
-	public GroupCustomerDetailsController() {
-		
-	}
-	
-	public GroupCustomerDetailsController(String groupName, String customerName, String customerNumber) {
-		this.groupName = groupName;
-		this.customerName = customerName;
-		this.customerNumber = customerNumber;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    private boolean status;
+    private String modifiedBy;
+    private String modifiedOn;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public GroupCustomerDetailsController() {
+    }
 
-	public String getGroupName() {
-		return groupName;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getCustomerName() {
-		return customerName;
-	}
+    public boolean isStatus() {
+        return status;
+    }
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
-	public String getCustomerNumber() {
-		return customerNumber;
-	}
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
 
-	public void setCustomerNumber(String customerNumber) {
-		this.customerNumber = customerNumber;
-	}
-	
-	
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
+    }
+
+    public String getModifiedOn() {
+        return modifiedOn;
+    }
+
+    public void setModifiedOn(String modifiedOn) {
+        this.modifiedOn = modifiedOn;
+    }
+
 }
