@@ -1,23 +1,30 @@
 package com.lic.epgs.group.groupcustomerdetailscontroller.service;
 
-import com.lic.epgs.group.groupcustomerdetailscontroller.model.GroupCustomerDetailsController;
-import com.lic.epgs.group.groupcustomerdetailscontroller.repository.GroupCustomerDetailsControllerRepository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import com.lic.epgs.group.groupcustomerdetailscontroller.model.GroupCustomerAddressDetails;
+import com.lic.epgs.group.groupcustomerdetailscontroller.repository.GroupCustomerDetailsControllerRepository;
 
 @Service
 public class GroupCustomerDetailsControllerService {
-
+    
     @Autowired
     private GroupCustomerDetailsControllerRepository groupCustomerDetailsControllerRepository;
-
-    public List<GroupCustomerDetailsController> getInProgressCommonSearch_GROUP_CUSTOMER_DETAILS_CONTROLLER(String groupName, String groupCode,
-                                                                                                        String groupStatus, String workflowStatus, Integer pageCount,
-                                                                                                        Integer limit, Date startDate, Date endDate) {
-        return groupCustomerDetailsControllerRepository.getInProgressCommonSearch_GROUP_CUSTOMER_DETAILS_CONTROLLER(groupName, groupCode,
-                groupStatus, workflowStatus, pageCount, limit, startDate, endDate);
+    
+    public List<GroupCustomerAddressDetails> getGroupCustomerAddressDetailsByGroupAddressIdAndGroupCustomerId(Long groupAddressId, Long groupCustomerId) {
+        return groupCustomerDetailsControllerRepository.findByGroupAddressIdAndGroupCustomerId(groupAddressId, groupCustomerId);
     }
+    
+    public List<GroupCustomerAddressDetails> getGroupCustomerAddressDetailsByGroupCustomerId(Long groupCustomerId) {
+        return groupCustomerDetailsControllerRepository.findByGroupCustomerId(groupCustomerId);
+    }
+    
+    public Optional<GroupCustomerAddressDetails> getGroupCustomerAddressDetailsByGroupCustomerIdAndAddressId(Long groupCustomerId, Long addressId) {
+        return groupCustomerDetailsControllerRepository.findByGroupCustomerIdAndAddressId(groupCustomerId, addressId);
+    }
+    
 }
