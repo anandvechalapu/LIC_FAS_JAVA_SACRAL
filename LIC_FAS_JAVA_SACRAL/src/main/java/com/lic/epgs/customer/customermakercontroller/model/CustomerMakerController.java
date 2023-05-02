@@ -1,27 +1,14 @@
 package com.lic.epgs.customer.customermakercontroller.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "customer_maker_controller")
 public class CustomerMakerController {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
-
-    @Column(name = "maker_name")
-    private String makerName;
-
-    @Column(name = "maker_notes")
-    private String makerNotes;
-
-    @Column(name = "maker_date")
-    private String makerDate;
-
-    public CustomerMakerController() {
-    }
+    private String customerName;
 
     public Long getId() {
         return id;
@@ -31,28 +18,12 @@ public class CustomerMakerController {
         this.id = id;
     }
 
-    public String getMakerName() {
-        return makerName;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setMakerName(String makerName) {
-        this.makerName = makerName;
-    }
-
-    public String getMakerNotes() {
-        return makerNotes;
-    }
-
-    public void setMakerNotes(String makerNotes) {
-        this.makerNotes = makerNotes;
-    }
-
-    public String getMakerDate() {
-        return makerDate;
-    }
-
-    public void setMakerDate(String makerDate) {
-        this.makerDate = makerDate;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
 }
