@@ -7,17 +7,24 @@ import javax.persistence.Id;
 
 @Entity
 public class CommonResponseDto {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String roleType;
-    private String unitCode;
-    private String customerName;
-    private String trustCode;
-    private String trustName;
-    
-    // getters and setters
-    
+
+    private String status;
+    private String message;
+    private Object data;
+
+    public CommonResponseDto() {
+    }
+
+    public CommonResponseDto(String status, String message, Object data) {
+        this.status = status;
+        this.message = message;
+        this.data = data;
+    }
+
     public Long getId() {
         return id;
     }
@@ -26,44 +33,28 @@ public class CommonResponseDto {
         this.id = id;
     }
 
-    public String getRoleType() {
-        return roleType;
+    public String getStatus() {
+        return status;
     }
 
-    public void setRoleType(String roleType) {
-        this.roleType = roleType;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public String getUnitCode() {
-        return unitCode;
+    public String getMessage() {
+        return message;
     }
 
-    public void setUnitCode(String unitCode) {
-        this.unitCode = unitCode;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public Object getData() {
+        return data;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setData(Object data) {
+        this.data = data;
     }
 
-    public String getTrustCode() {
-        return trustCode;
-    }
-
-    public void setTrustCode(String trustCode) {
-        this.trustCode = trustCode;
-    }
-
-    public String getTrustName() {
-        return trustName;
-    }
-
-    public void setTrustName(String trustName) {
-        this.trustName = trustName;
-    }
-    
 }
