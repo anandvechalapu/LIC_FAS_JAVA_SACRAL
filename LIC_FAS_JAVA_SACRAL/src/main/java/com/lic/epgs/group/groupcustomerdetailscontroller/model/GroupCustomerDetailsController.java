@@ -1,120 +1,64 @@
 package com.lic.epgs.group.groupcustomerdetailscontroller.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "GROUP_CUSTOMER_DETAILS_CONTROLLER")
-public class GroupCustomerDetailsController implements Serializable {
+public class GroupCustomerDetailsController {
 
-    private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	
+	private String groupName;
+	
+	private String customerName;
+	
+	private String customerNumber;
+	
+	public GroupCustomerDetailsController() {
+		
+	}
+	
+	public GroupCustomerDetailsController(String groupName, String customerName, String customerNumber) {
+		this.groupName = groupName;
+		this.customerName = customerName;
+		this.customerNumber = customerNumber;
+	}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "GROUP_ID")
-    private Long groupId;
+	public Long getId() {
+		return id;
+	}
 
-    @Column(name = "GROUP_NAME")
-    private String groupName;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    @Column(name = "GROUP_CODE")
-    private String groupCode;
+	public String getGroupName() {
+		return groupName;
+	}
 
-    @Column(name = "GROUP_STATUS")
-    private String groupStatus;
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
 
-    @Column(name = "WORKFLOW_STATUS")
-    private String workflowStatus;
+	public String getCustomerName() {
+		return customerName;
+	}
 
-    @Column(name = "PAGE_COUNT")
-    private Integer pageCount;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
 
-    @Column(name = "LIMIT")
-    private Integer limit;
+	public String getCustomerNumber() {
+		return customerNumber;
+	}
 
-    @Column(name = "START_DATE")
-    private Date startDate;
-
-    @Column(name = "END_DATE")
-    private Date endDate;
-
-    public Long getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    public String getGroupCode() {
-        return groupCode;
-    }
-
-    public void setGroupCode(String groupCode) {
-        this.groupCode = groupCode;
-    }
-
-    public String getGroupStatus() {
-        return groupStatus;
-    }
-
-    public void setGroupStatus(String groupStatus) {
-        this.groupStatus = groupStatus;
-    }
-
-    public String getWorkflowStatus() {
-        return workflowStatus;
-    }
-
-    public void setWorkflowStatus(String workflowStatus) {
-        this.workflowStatus = workflowStatus;
-    }
-
-    public Integer getPageCount() {
-        return pageCount;
-    }
-
-    public void setPageCount(Integer pageCount) {
-        this.pageCount = pageCount;
-    }
-
-    public Integer getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
+	public void setCustomerNumber(String customerNumber) {
+		this.customerNumber = customerNumber;
+	}
+	
+	
 }
