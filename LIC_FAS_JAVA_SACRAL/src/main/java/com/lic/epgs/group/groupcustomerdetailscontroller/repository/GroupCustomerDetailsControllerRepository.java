@@ -1,7 +1,11 @@
 @Repository
-public interface GroupCustomerDetailsControllerRepository {
-    List<GroupCustomerDetails> findByGroupCustomerIdAndContactId(Long groupCustomerId, Long contactId);
-    List<GroupCustomerDetails> findAllByGroupCustomerIdAndContactId(Long groupCustomerId, Long contactId);
-    void save(GroupCustomerDetails groupCustomerDetails);
-    void delete(GroupCustomerDetails groupCustomerDetails);
+public interface GroupCustomerDetailsControllerRepository { 
+ 
+    public List<Customer> searchMemberCustomerDetails(String customerCode, String customerName, String trustName);
+ 
+    public List<Customer> getActiveMemberCustomers();
+ 
+    public List<Customer> getCustomerBasicDetails(String customerCode, String customerName, String customerStatus);
+ 
+    public List<Trust> getTrustDetails(String trustName, String trustId);
 }
