@@ -1,30 +1,33 @@
 package com.lic.epgs.customer.customercheckercontroller.service;
 
-import com.lic.epgs.customer.customercheckercontroller.repository.CustomerCheckerControllerRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.UUID;
+
+import com.lic.epgs.customer.customercheckercontroller.model.Customer;
+import com.lic.epgs.customer.customercheckercontroller.repository.CustomerCheckerControllerRepository;
 
 @Service
 public class CustomerCheckerControllerService {
 
-  @Autowired
-  private CustomerCheckerControllerRepository customerCheckerControllerRepository;
+    @Autowired
+    private CustomerCheckerControllerRepository customerCheckerControllerRepository;
 
-  public CustomerCheckerController findApprovedCustomer() {
-    return customerCheckerControllerRepository.findApprovedCustomer();
-  }
+    public Customer getCustomer(Long customerId) {
+        return customerCheckerControllerRepository.findByCustomerId(customerId);
+    }
 
-  public void approveCustomerById(UUID id) {
-    customerCheckerControllerRepository.approveCustomerById(id);
-  }
+    public Customer getCustomer(Long customerId, String trustCode) {
+        return customerCheckerControllerRepository.findByCustomerIdAndTrustCode(customerId, trustCode);
+    }
 
-  public void setCustomerInactive(UUID id) {
-    customerCheckerControllerRepository.setCustomerInactive(id);
-  }
+    public Customer getCustomer(Long customerId, String trustCode, String trustName) {
+        return customerCheckerControllerRepository.findByCustomerIdAndTrustCodeAndTrustName(customerId, trustCode, trustName);
+    }
 
-  public void updateCustomerData(UUID id, String address, String contactDetails, String migrationData) {
-    customerCheckerControllerRepository.updateCustomerData(id, address, contactDetails, migrationData);
-  }
+    public List<Customer> getAllCustomers() {
+        return customerCheckerControllerRepository.findAll();
+    }
 
 }
