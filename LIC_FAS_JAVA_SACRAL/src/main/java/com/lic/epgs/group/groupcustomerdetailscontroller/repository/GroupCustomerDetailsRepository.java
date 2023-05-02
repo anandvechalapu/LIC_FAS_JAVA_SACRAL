@@ -1,24 +1,23 @@
 package com.lic.epgs.group.groupcustomerdetailscontroller.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import com.lic.epgs.group.groupcustomerdetailscontroller.model.GroupCustomerDetails;
+import com.lic.epgs.group.groupcustomerdetailscontroller.dto.GroupCustomerBasicDetailsDto;
+import com.lic.epgs.group.groupcustomerdetailscontroller.dto.CommonResponseDto;
+import com.lic.epgs.group.groupcustomerdetailscontroller.entity.GroupCustomerBasicDetailsTempEntity;
 
-public interface GroupCustomerDetailsRepository extends JpaRepository<GroupCustomerDetails, Long> {
-	
-	GroupCustomerDetails findByGroupCustomerId(Long groupCustomerId);
-	
-	GroupCustomerDetails findByBasicDetailsNameAndType(String name, String type);
-	
-	GroupCustomerDetails findByContactDetailsPrimaryContactNameAndNumber(String contactName, String contactNumber);
-	
-	GroupCustomerDetails findByAddressDetailsAddressLineAndCity(String addressLine, String city);
-	
-	GroupCustomerDetails findByGroupCustomerDetailsCustomerIdAndName(Long customerId, String customerName);
-	
-	GroupCustomerDetails findByNotes(String notes);
-	
-	GroupCustomerDetails findByBankAccountDetailsAccountNumberAndBankName(String accountNumber, String bankName);
-	
-	GroupCustomerDetails findByGroupCustomerIdAndReturnErrorMessage(Long groupCustomerId);
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+@Repository
+public interface GroupCustomerDetailsRepository extends JpaRepository<GroupCustomerBasicDetailsTempEntity, Long> {
+
+    @Transactional
+    GroupCustomerBasicDetailsTempEntity findByGroupCustomerId(String groupCustomerId);
+
+    @Transactional
+    GroupCustomerBasicDetailsTempEntity save(GroupCustomerBasicDetailsDto groupCustomerBasicDetailsDto);
+
+    @Transactional
+    CommonResponseDto updateGroupStatusAndWorkflowStatus(Long groupCustomerId, String groupStatus, String workflowStatus);
 
 }
