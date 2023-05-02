@@ -1,47 +1,49 @@
 package com.lic.epgs.group.groupcustomercheckercontroller.service;
 
-import java.util.Optional;
-
+import com.lic.epgs.group.groupcustomercheckercontroller.repository.GroupCustomerCheckerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lic.epgs.group.groupcustomercheckercontroller.dto.GroupCustomerBasicDetailsDto;
-import com.lic.epgs.group.groupcustomercheckercontroller.entity.AddressDetailsEntity;
-import com.lic.epgs.group.groupcustomercheckercontroller.entity.GroupCustomerBasicDetailsEntity;
-import com.lic.epgs.group.groupcustomercheckercontroller.entity.GroupCustomerBasicDetailsTempEntity;
-import com.lic.epgs.group.groupcustomercheckercontroller.repository.GroupCustomerCheckerRepository;
-
 @Service
 public class GroupCustomerCheckerService {
-	
-	@Autowired
-	private GroupCustomerCheckerRepository groupCustomerCheckerRepository;
-	
-	public GroupCustomerBasicDetailsTempEntity findByGroupCustomerIdAndIsActiveTrue(String groupCustomerId) {
-		return groupCustomerCheckerRepository.findByGroupCustomerIdAndIsActiveTrue(groupCustomerId);
-	}
-	
-	public AddressDetailsEntity findByGroupCustomerIdAndIsActiveTrue(String newEntityGroupCustomerId) {
-		return groupCustomerCheckerRepository.findByGroupCustomerIdAndIsActiveTrue(newEntityGroupCustomerId);
-	}
-	
-	public GroupCustomerBasicDetailsEntity save(GroupCustomerBasicDetailsEntity groupCustomerBasicDetailsEntity) {
-		return groupCustomerCheckerRepository.save(groupCustomerBasicDetailsEntity);
-	}
-	
-	public GroupCustomerBasicDetailsDto getGroupCustomerDetails(String groupCustomerId){
-		Optional<GroupCustomerBasicDetailsEntity> groupCustomerBasicDetailsEntity = groupCustomerCheckerRepository.findById(groupCustomerId);
-		
-		GroupCustomerBasicDetailsDto groupCustomerBasicDetailsDto = new GroupCustomerBasicDetailsDto();
-		if(groupCustomerBasicDetailsEntity.isPresent()){
-			groupCustomerBasicDetailsDto.setGroupCustomerId(groupCustomerBasicDetailsEntity.get().getGroupCustomerId());
-			groupCustomerBasicDetailsDto.setGroupCustomerName(groupCustomerBasicDetailsEntity.get().getGroupCustomerName());
-			groupCustomerBasicDetailsDto.setGroupCustomerType(groupCustomerBasicDetailsEntity.get().getGroupCustomerType());
-			groupCustomerBasicDetailsDto.setGroupCustomerDescription(groupCustomerBasicDetailsEntity.get().getGroupCustomerDescription());
-			groupCustomerBasicDetailsDto.setGroupCustomerStatus(groupCustomerBasicDetailsEntity.get().getGroupCustomerStatus());
-			groupCustomerBasicDetailsDto.setIsActive(groupCustomerBasicDetailsEntity.get().getIsActive());
-			groupCustomerBasicDetailsDto.setIsPrimaryContact(groupCustomerBasicDetailsEntity.get().getIsPrimaryContact());
-		}
-		return groupCustomerBasicDetailsDto;
-	}	
+
+    @Autowired
+    private GroupCustomerCheckerRepository groupCustomerCheckerRepository;
+
+    public void rejectGroupCustomer(Integer groupCustomerId, String rejectionRemarks, String modifiedBy) {
+        groupCustomerCheckerRepository.rejectGroupCustomer(groupCustomerId, rejectionRemarks, modifiedBy);
+    }
+
+    public void updateIsActiveInGroupCustomerBasicDetailsTempEntity(Integer groupCustomerId, Boolean isActive) {
+        groupCustomerCheckerRepository.updateIsActiveInGroupCustomerBasicDetailsTempEntity(groupCustomerId, isActive);
+    }
+
+    public void addNewEntryInGroupCustomerBasicDetailsTempEntity(Integer groupCustomerId, String rejectionRemarks, String modifiedBy) {
+        groupCustomerCheckerRepository.addNewEntryInGroupCustomerBasicDetailsTempEntity(groupCustomerId, rejectionRemarks, modifiedBy);
+    }
+
+    public void updateGroupCustomerBasicDetailsTempEntity(Integer groupCustomerId, String groupStatus, String workflowStatus, String rejectionRemarks, String modifiedBy) {
+        groupCustomerCheckerRepository.updateGroupCustomerBasicDetailsTempEntity(groupCustomerId, groupStatus, workflowStatus, rejectionRemarks, modifiedBy);
+    }
+
+    public void updateIsActiveInNewEntryGroupCustomerBasicDetailsTempEntity(Integer groupCustomerId, Boolean isActive) {
+        groupCustomerCheckerRepository.updateIsActiveInNewEntryGroupCustomerBasicDetailsTempEntity(groupCustomerId, isActive);
+    }
+
+    public void updateGroupCustomerBasicDetailsEntity(String groupCode, String groupStatus, String workflowStatus) {
+        groupCustomerCheckerRepository.updateGroupCustomerBasicDetailsEntity(groupCode, groupStatus, workflowStatus);
+    }
+
+    public void addNewEntryInAddressDetailsEntity(Integer tempAddressId, Integer addressId) {
+        groupCustomerCheckerRepository.addNewEntryInAddressDetailsEntity(tempAddressId, addressId);
+    }
+
+    public void addNewEntryInContactDetailEntity(Integer tempContactPersonId, Integer contactPersonId) {
+        groupCustomerCheckerRepository.addNewEntryInContactDetailEntity(tempContactPersonId, contactPersonId);
+    }
+
+    public void addNewEntryInCustomerNotesEntity(Integer tempNoteId, Integer noteId) {
+        groupCustomerCheckerRepository.addNewEntryInCustomerNotesEntity(tempNoteId, noteId);
+    }
+
 }
