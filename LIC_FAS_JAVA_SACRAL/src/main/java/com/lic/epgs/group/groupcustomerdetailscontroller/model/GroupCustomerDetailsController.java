@@ -1,93 +1,120 @@
 package com.lic.epgs.group.groupcustomerdetailscontroller.model;
 
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "group_customer_details_controller")
-public class GroupCustomerDetailsController {
+@Table(name = "GROUP_CUSTOMER_DETAILS_CONTROLLER")
+public class GroupCustomerDetailsController implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    private int id;
-    private int groupCustomerId;
-    private String customerCode;
-    private String customerName;
-    private String customerPhone;
-    private String customerEmail;
-    private String customerAddress;
-    private String customerCity;
-    private boolean isActive;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "GROUP_ID")
+    private Long groupId;
 
-    public int getId() {
-        return id;
+    @Column(name = "GROUP_NAME")
+    private String groupName;
+
+    @Column(name = "GROUP_CODE")
+    private String groupCode;
+
+    @Column(name = "GROUP_STATUS")
+    private String groupStatus;
+
+    @Column(name = "WORKFLOW_STATUS")
+    private String workflowStatus;
+
+    @Column(name = "PAGE_COUNT")
+    private Integer pageCount;
+
+    @Column(name = "LIMIT")
+    private Integer limit;
+
+    @Column(name = "START_DATE")
+    private Date startDate;
+
+    @Column(name = "END_DATE")
+    private Date endDate;
+
+    public Long getGroupId() {
+        return groupId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 
-    public int getGroupCustomerId() {
-        return groupCustomerId;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setGroupCustomerId(int groupCustomerId) {
-        this.groupCustomerId = groupCustomerId;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
-    public String getCustomerCode() {
-        return customerCode;
+    public String getGroupCode() {
+        return groupCode;
     }
 
-    public void setCustomerCode(String customerCode) {
-        this.customerCode = customerCode;
+    public void setGroupCode(String groupCode) {
+        this.groupCode = groupCode;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getGroupStatus() {
+        return groupStatus;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setGroupStatus(String groupStatus) {
+        this.groupStatus = groupStatus;
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
+    public String getWorkflowStatus() {
+        return workflowStatus;
     }
 
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setWorkflowStatus(String workflowStatus) {
+        this.workflowStatus = workflowStatus;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public Integer getPageCount() {
+        return pageCount;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
     }
 
-    public String getCustomerAddress() {
-        return customerAddress;
+    public Integer getLimit() {
+        return limit;
     }
 
-    public void setCustomerAddress(String customerAddress) {
-        this.customerAddress = customerAddress;
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 
-    public String getCustomerCity() {
-        return customerCity;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setCustomerCity(String customerCity) {
-        this.customerCity = customerCity;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
+
 }
