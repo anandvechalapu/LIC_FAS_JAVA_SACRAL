@@ -1,23 +1,16 @@
 package com.lic.epgs.group.groupcustomerdetailscontroller.repository;
 
-import com.lic.epgs.group.groupcustomerdetailscontroller.dto.GroupCustomerBasicDetailsDto;
-import com.lic.epgs.group.groupcustomerdetailscontroller.dto.CommonResponseDto;
-import com.lic.epgs.group.groupcustomerdetailscontroller.entity.GroupCustomerBasicDetailsTempEntity;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-@Repository
-public interface GroupCustomerDetailsRepository extends JpaRepository<GroupCustomerBasicDetailsTempEntity, Long> {
+import com.lic.epgs.group.groupcustomerdetailscontroller.model.GroupCustomerDetails;
 
-    @Transactional
-    GroupCustomerBasicDetailsTempEntity findByGroupCustomerId(String groupCustomerId);
+public interface GroupCustomerDetailsRepository extends JpaRepository<GroupCustomerDetails, Long> {
 
-    @Transactional
-    GroupCustomerBasicDetailsTempEntity save(GroupCustomerBasicDetailsDto groupCustomerBasicDetailsDto);
-
-    @Transactional
-    CommonResponseDto updateGroupStatusAndWorkflowStatus(Long groupCustomerId, String groupStatus, String workflowStatus);
+  @Modifying
+  @Query("UPDATE GroupCustomerDetails gcd SET gcd.isActive = false WHERE gcd.groupCustomerId = :groupCustomerId")
+  void deleteGroupCustomerDetails(@Param("groupCustomerId") Long groupCustomerId);
 
 }
