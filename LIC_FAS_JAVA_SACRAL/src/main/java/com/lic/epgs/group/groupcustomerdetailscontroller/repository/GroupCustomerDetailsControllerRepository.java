@@ -1,10 +1,7 @@
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface GroupCustomerDetailsControllerRepository extends JpaRepository<GroupCustomerAddressDetails, Long> {
-    
-    List<GroupCustomerAddressDetails> findByGroupAddressIdAndGroupCustomerId(Long groupAddressId, Long groupCustomerId);
-    
-    List<GroupCustomerAddressDetails> findByGroupCustomerId(Long groupCustomerId);
-    
-    Optional<GroupCustomerAddressDetails> findByGroupCustomerIdAndAddressId(Long groupCustomerId, Long addressId);
+@Repository
+public interface GroupCustomerDetailsControllerRepository {
+    List<GroupCustomerDetails> findByGroupCustomerIdAndContactId(Long groupCustomerId, Long contactId);
+    List<GroupCustomerDetails> findAllByGroupCustomerIdAndContactId(Long groupCustomerId, Long contactId);
+    void save(GroupCustomerDetails groupCustomerDetails);
+    void delete(GroupCustomerDetails groupCustomerDetails);
 }
