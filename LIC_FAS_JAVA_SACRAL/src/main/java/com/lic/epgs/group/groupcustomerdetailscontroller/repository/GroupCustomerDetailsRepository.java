@@ -1,16 +1,24 @@
 package com.lic.epgs.group.groupcustomerdetailscontroller.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 import com.lic.epgs.group.groupcustomerdetailscontroller.model.GroupCustomerDetails;
 
-@Repository
 public interface GroupCustomerDetailsRepository extends JpaRepository<GroupCustomerDetails, Long> {
+	
+	GroupCustomerDetails findByGroupCustomerId(Long groupCustomerId);
+	
+	GroupCustomerDetails findByBasicDetailsNameAndType(String name, String type);
+	
+	GroupCustomerDetails findByContactDetailsPrimaryContactNameAndNumber(String contactName, String contactNumber);
+	
+	GroupCustomerDetails findByAddressDetailsAddressLineAndCity(String addressLine, String city);
+	
+	GroupCustomerDetails findByGroupCustomerDetailsCustomerIdAndName(Long customerId, String customerName);
+	
+	GroupCustomerDetails findByNotes(String notes);
+	
+	GroupCustomerDetails findByBankAccountDetailsAccountNumberAndBankName(String accountNumber, String bankName);
+	
+	GroupCustomerDetails findByGroupCustomerIdAndReturnErrorMessage(Long groupCustomerId);
 
-    @Query("SELECT g FROM GroupCustomerDetails g WHERE g.groupCustomerId = ?1 AND g.unitCode = ?2")
-    public GroupCustomerDetails getGroupDetailsMakerByGroupCustomerIdAndUnitCode(Long groupCustomerId, String unitCode);
-
-    @Query("SELECT g FROM GroupCustomerDetails g WHERE g.groupCustomerId = ?1")
-    public GroupCustomerDetails getGroupDetailsMakerByGroupCustomerId(Long groupCustomerId);
 }
