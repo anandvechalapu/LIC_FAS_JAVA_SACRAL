@@ -2,82 +2,92 @@ package com.lic.epgs.group.groupcustomerdetailscontroller.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "group_customer_details_controller")
 public class GroupCustomerDetailsController {
 
-	@Id
-	private Long groupId;
-	private String groupName;
-	private Long trustId;
-	private String trustName;
-	private String trustType;
-	private Long customerId;
-	private String name;
-	private String address;
+    @Id
+    private int id;
+    private int groupCustomerId;
+    private String customerCode;
+    private String customerName;
+    private String customerPhone;
+    private String customerEmail;
+    private String customerAddress;
+    private String customerCity;
+    private boolean isActive;
 
-	public Long getGroupId() {
-		return groupId;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setGroupId(Long groupId) {
-		this.groupId = groupId;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getGroupName() {
-		return groupName;
-	}
+    public int getGroupCustomerId() {
+        return groupCustomerId;
+    }
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
+    public void setGroupCustomerId(int groupCustomerId) {
+        this.groupCustomerId = groupCustomerId;
+    }
 
-	public Long getTrustId() {
-		return trustId;
-	}
+    public String getCustomerCode() {
+        return customerCode;
+    }
 
-	public void setTrustId(Long trustId) {
-		this.trustId = trustId;
-	}
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode;
+    }
 
-	public String getTrustName() {
-		return trustName;
-	}
+    public String getCustomerName() {
+        return customerName;
+    }
 
-	public void setTrustName(String trustName) {
-		this.trustName = trustName;
-	}
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
-	public String getTrustType() {
-		return trustType;
-	}
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
 
-	public void setTrustType(String trustType) {
-		this.trustType = trustType;
-	}
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
 
-	public Long getCustomerId() {
-		return customerId;
-	}
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-	}
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getCustomerCity() {
+        return customerCity;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setCustomerCity(String customerCity) {
+        this.customerCity = customerCity;
+    }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 }
