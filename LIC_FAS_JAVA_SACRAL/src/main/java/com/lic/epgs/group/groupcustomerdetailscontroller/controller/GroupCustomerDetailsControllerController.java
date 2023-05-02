@@ -1,31 +1,36 @@
-package com.lic.epgs.group.groupcustomerdetailscontroller.controller;
+package com.lic.epgs.group.groupcustomerdetailscontroller.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.lic.epgs.group.groupcustomerdetailscontroller.model.GroupCustomerDetailsController;
-import com.lic.epgs.group.groupcustomerdetailscontroller.service.GroupCustomerDetailsControllerService;
+
+@Repository
+public interface GroupCustomerDetailsControllerRepository extends JpaRepository<GroupCustomerDetailsController, Long> {
+
+	GroupCustomerDetailsController updateGroupStatus(Long id, boolean status, String modifiedBy, String modifiedOn);
+
+}
+
+package com.lic.epgs.group.groupcustomerdetailscontroller.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-import java.util.List;
+import com.lic.epgs.group.groupcustomerdetailscontroller.model.GroupCustomerDetailsController;
+import com.lic.epgs.group.groupcustomerdetailscontroller.service.GroupCustomerDetailsControllerService;
 
 @RestController
-@RequestMapping("/groupCustomerDetailsController")
 public class GroupCustomerDetailsControllerController {
-
-    @Autowired
-    private GroupCustomerDetailsControllerService groupCustomerDetailsControllerService;
-
-    @GetMapping("/getInProgressCommonSearch_GROUP_CUSTOMER_DETAILS_CONTROLLER")
-    public List<GroupCustomerDetailsController> getInProgressCommonSearch_GROUP_CUSTOMER_DETAILS_CONTROLLER(@RequestParam String groupName,
-                                                                                                         @RequestParam String groupCode, @RequestParam String groupStatus,
-                                                                                                         @RequestParam String workflowStatus, @RequestParam Integer pageCount,
-                                                                                                         @RequestParam Integer limit, @RequestParam Date startDate,
-                                                                                                         @RequestParam Date endDate) {
-        return groupCustomerDetailsControllerService.getInProgressCommonSearch_GROUP_CUSTOMER_DETAILS_CONTROLLER(groupName, groupCode,
-                groupStatus, workflowStatus, pageCount, limit, startDate, endDate);
-    }
+	
+	@Autowired
+	GroupCustomerDetailsControllerService groupCustomerDetailsControllerService;
+	
+	@PutMapping("/updateGroupStatus")
+	public GroupCustomerDetailsController updateGroupStatus(@RequestParam Long id, @RequestParam boolean status, @RequestParam String modifiedBy, @RequestParam String modifiedOn) {
+		return groupCustomerDetailsControllerService.updateGroupStatus(id, status, modifiedBy, modifiedOn);
+	}
 
 }
