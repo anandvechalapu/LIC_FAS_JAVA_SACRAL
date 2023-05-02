@@ -1,37 +1,39 @@
 package com.lic.epgs.group.groupcustomerdetailscontroller.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lic.epgs.group.groupcustomerdetailscontroller.model.GroupCustomerAddressDetails;
+import com.lic.epgs.group.groupcustomerdetailscontroller.model.GroupCustomerDetails;
 import com.lic.epgs.group.groupcustomerdetailscontroller.service.GroupCustomerDetailsControllerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/group_customer_address_details")
+@RequestMapping("/groupcustomerdetails")
 public class GroupCustomerDetailsController {
-    
+
     @Autowired
     private GroupCustomerDetailsControllerService groupCustomerDetailsControllerService;
-    
-    @GetMapping("/group_address_id/{groupAddressId}/group_customer_id/{groupCustomerId}")
-    public List<GroupCustomerAddressDetails> getGroupCustomerAddressDetailsByGroupAddressIdAndGroupCustomerId(@PathVariable Long groupAddressId, @PathVariable Long groupCustomerId) {
-        return groupCustomerDetailsControllerService.getGroupCustomerAddressDetailsByGroupAddressIdAndGroupCustomerId(groupAddressId, groupCustomerId);
+
+    @GetMapping("/findByGroupCustomerIdAndContactId")
+    public List<GroupCustomerDetails> findByGroupCustomerIdAndContactId(@RequestParam(value = "groupCustomerId") Long groupCustomerId,
+                                                                        @RequestParam(value = "contactId") Long contactId) {
+        return groupCustomerDetailsControllerService.findByGroupCustomerIdAndContactId(groupCustomerId, contactId);
     }
-    
-    @GetMapping("/group_customer_id/{groupCustomerId}")
-    public List<GroupCustomerAddressDetails> getGroupCustomerAddressDetailsByGroupCustomerId(@PathVariable Long groupCustomerId) {
-        return groupCustomerDetailsControllerService.getGroupCustomerAddressDetailsByGroupCustomerId(groupCustomerId);
+
+    @GetMapping("/findAllByGroupCustomerIdAndContactId")
+    public List<GroupCustomerDetails> findAllByGroupCustomerIdAndContactId(@RequestParam(value = "groupCustomerId") Long groupCustomerId,
+                                                                          @RequestParam(value = "contactId") Long contactId) {
+        return groupCustomerDetailsControllerService.findAllByGroupCustomerIdAndContactId(groupCustomerId, contactId);
     }
-    
-    @GetMapping("/group_customer_id/{groupCustomerId}/address_id/{addressId}")
-    public Optional<GroupCustomerAddressDetails> getGroupCustomerAddressDetailsByGroupCustomerIdAndAddressId(@PathVariable Long groupCustomerId, @PathVariable Long addressId) {
-        return groupCustomerDetailsControllerService.getGroupCustomerAddressDetailsByGroupCustomerIdAndAddressId(groupCustomerId, addressId);
+
+    @PostMapping("/save")
+    public GroupCustomerDetails save(@RequestBody GroupCustomerDetails groupCustomerDetails) {
+        return groupCustomerDetailsControllerService.save(groupCustomerDetails);
     }
-    
+
+    @DeleteMapping("/delete")
+    public void delete(@RequestBody GroupCustomerDetails groupCustomerDetails) {
+        groupCustomerDetailsControllerService.delete(groupCustomerDetails);
+    }
+
 }
