@@ -1,59 +1,67 @@
 package com.lic.epgs.group.groupcustomerdetailscontroller.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "group_customer_details")
+@Table(name = "Group_Customer_Details")
 public class GroupCustomerDetails {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "group_customer_id")
-  private Long groupCustomerId;
+    @Id
+    private Long groupCustomerId;
+    private String customerName;
+    private String customerCode;
+    private Integer customerAge;
+    private String customerGender;
+    private String customerAddress;
 
-  @Column(name = "customer_id")
-  private Long customerId;
+    public Long getGroupCustomerId() {
+        return groupCustomerId;
+    }
 
-  @Column(name = "group_id")
-  private Long groupId;
+    public void setGroupCustomerId(Long groupCustomerId) {
+        this.groupCustomerId = groupCustomerId;
+    }
 
-  @Column(name = "is_active")
-  private Boolean isActive;
+    public String getCustomerName() {
+        return customerName;
+    }
 
-  public Long getGroupCustomerId() {
-    return groupCustomerId;
-  }
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
-  public void setGroupCustomerId(Long groupCustomerId) {
-    this.groupCustomerId = groupCustomerId;
-  }
+    public String getCustomerCode() {
+        return customerCode;
+    }
 
-  public Long getCustomerId() {
-    return customerId;
-  }
+    public void setCustomerCode(String customerCode) {
+        this.customerCode = customerCode;
+    }
 
-  public void setCustomerId(Long customerId) {
-    this.customerId = customerId;
-  }
+    public Integer getCustomerAge() {
+        return customerAge;
+    }
 
-  public Long getGroupId() {
-    return groupId;
-  }
+    public void setCustomerAge(Integer customerAge) {
+        this.customerAge = customerAge;
+    }
 
-  public void setGroupId(Long groupId) {
-    this.groupId = groupId;
-  }
+    public String getCustomerGender() {
+        return customerGender;
+    }
 
-  public Boolean getIsActive() {
-    return isActive;
-  }
+    public void setCustomerGender(String customerGender) {
+        this.customerGender = customerGender;
+    }
 
-  public void setIsActive(Boolean isActive) {
-    this.isActive = isActive;
-  }
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
+
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+
 }
