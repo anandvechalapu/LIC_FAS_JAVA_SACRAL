@@ -1,19 +1,29 @@
 @Entity
 @Table(name = "customer")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 @ToString
-public class Customer implements Serializable {
-
+@PackageName("com.lic.epgs.group.groupcustomerdetailscontroller.model")
+public class Customer {
+ 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+ 
     @Column(name = "customer_code")
     private String customerCode;
-
-    @Column(name = "group_id")
-    private long groupId;
-
+ 
+    @Column(name = "customer_name")
+    private String customerName;
+ 
+    @Column(name = "customer_status")
+    private String customerStatus;
+ 
+    @Column(name = "trust_name")
+    private String trustName;
+ 
+    @Column(name = "trust_id")
+    private String trustId;
 }
