@@ -1,66 +1,50 @@
 package com.lic.epgs.proposal.proposalmakercontroller.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "proposal")
 public class Proposal {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "proposal_id")
+    private Long proposalId;
+
+    @Column(name = "user_modified")
+    private String userModified;
+    
+    @Column(name = "status")
+    private String status;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long proposalId;
-	
-	private String userId;
-	
-	private String status;
-	
-	private String document;
-	
-	public Proposal() {
-		
-	}
-	
-	public Proposal(Long proposalId, String userId, String status, String document) {
-		this.proposalId = proposalId;
-		this.userId = userId;
-		this.status = status;
-		this.document = document;
-	}
+    // Getters and Setters
+    
+    public Long getProposalId() {
+        return proposalId;
+    }
 
-	public Long getProposalId() {
-		return proposalId;
-	}
+    public void setProposalId(Long proposalId) {
+        this.proposalId = proposalId;
+    }
 
-	public void setProposalId(Long proposalId) {
-		this.proposalId = proposalId;
-	}
+    public String getUserModified() {
+        return userModified;
+    }
 
-	public String getUserId() {
-		return userId;
-	}
+    public void setUserModified(String userModified) {
+        this.userModified = userModified;
+    }
+    
+    public String getStatus() {
+        return status;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getDocument() {
-		return document;
-	}
-
-	public void setDocument(String document) {
-		this.document = document;
-	}
-	
-	
-
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
