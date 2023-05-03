@@ -1,49 +1,59 @@
 package com.lic.epgs.proposal.proposalmakercontroller.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lic.epgs.proposal.proposalmakercontroller.model.ProposalDetails;
-import com.lic.epgs.proposal.proposalmakercontroller.service.GetProposalDetailsForIntegrationService;
+import com.lic.epgs.proposal.proposalmakercontroller.model.Proposal;
+import com.lic.epgs.proposal.proposalmakercontroller.service.ProposalMakerControllerService;
 
 @RestController
-@RequestMapping("/proposal")
+@RequestMapping("/proposals")
 public class ProposalMakerController {
+	@Autowired
+	private ProposalMakerControllerService proposalMakerControllerService;
 
-  @Autowired
-  private GetProposalDetailsForIntegrationService getProposalDetailsForIntegrationService;
+	@GetMapping
+	public List<Proposal> getAllProposals() {
+		return proposalMakerControllerService.findAll();
+	}
 
-  // Get Proposal Customer Basic Details
-  @GetMapping("/customer/{proposalNumber}")
-  public ProposalDetails getProposalCustomerBasicDetails(@PathVariable String proposalNumber) {
-    return getProposalDetailsForIntegrationService.getProposalCustomerBasicDetails(proposalNumber);
-  }
+	@GetMapping("/{proposalId}/{userModified}")
+	public Optional<Proposal> getProposalByIdAndUserModified(@PathVariable Long proposalId,
+			@PathVariable String userModified) {
+		return proposalMakerControllerService.findByProposalIdAndUserModified(proposalId, userModified);
+	}
 
-  // Get Proposal Channel Details
-  @GetMapping("/channel/{proposalNumber}")
-  public ProposalDetails getProposalChannelDetails(@PathVariable String proposalNumber) {
-    return getProposalDetailsForIntegrationService.getProposalChannelDetails(proposalNumber);
-  }
+	@PostMapping
+	public Proposal save(@RequestBody Proposal proposal) {
+		return proposalMakerControllerService.save(proposal);
+	}
 
-  // Get Proposal Address, Contact and Bank Details
-  @GetMapping("/contact/{proposalNumber}")
-  public ProposalDetails getProposalAddressContactBankDetails(@PathVariable String proposalNumber) {
-    return getProposalDetailsForIntegrationService.getProposalAddressContactBankDetails(proposalNumber);
-  }
+	@PostMapping("/inactive/{proposalId}")
+	public void markProposalInactive(@PathVariable Long proposalId) {
+		proposalMakerControllerService.markProposalInactive(proposalId);
+	}
 
-  // Get Proposal Basic Details
-  @GetMapping("/basic/{proposalNumber}")
-  public ProposalDetails getProposalBasicDetails(@PathVariable String proposalNumber) {
-    return getProposalDetailsForIntegrationService.getProposalBasicDetails(proposalNumber);
-  }
+	@PostMapping("/copy/{proposalId}/{status}")
+	public void createCopyOfProposal(@PathVariable Long proposalId, @PathVariable String status) {
+		proposalMakerControllerService.createCopyOfProposal(proposalId, status);
+	}
 
-  // Get Success/Failure response with a message
-  @GetMapping("/response/{proposalNumber}")
-  public ProposalDetails getSuccessFailureResponseMessage(@PathVariable String proposalNumber) {
-    return getProposalDetailsForIntegrationService.getSuccessFailureResponseMessage(proposalNumber);
-  }
+	@PostMapping("/maintain/{proposalId}")
+	public void maintainDocuments(@PathVariable Long proposalId) {
+		proposalMakerControllerService.maintainDocuments(proposalId);
+	}
+
+	@PostMapping("/response/{proposalId}/{status}")
+	public void sendResponse(@PathVariable Long proposalId, @PathVariable String status) {
+		proposalMakerControllerService.sendResponse(proposalId, status);
+	}
 
 }
