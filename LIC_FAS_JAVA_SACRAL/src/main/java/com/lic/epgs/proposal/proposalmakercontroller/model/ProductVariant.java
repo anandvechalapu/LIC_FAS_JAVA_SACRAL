@@ -1,58 +1,40 @@
 package com.lic.epgs.proposal.proposalmakercontroller.model;
- 
-import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
- 
+
 @Entity
-@Table(name = "product_variants")
-public class ProductVariant implements Serializable {
- 
-    private static final long serialVersionUID = 1L;
- 
+public class ProductVariant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
- 
-    private Long productId;
- 
-    private String variantName;
- 
-    private String variantValue;
- 
+    private String name;
+    private String description;
+
     public Long getId() {
         return id;
     }
- 
+
     public void setId(Long id) {
         this.id = id;
     }
- 
-    public Long getProductId() {
-        return productId;
+
+    public String getName() {
+        return name;
     }
- 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+
+    public void setName(String name) {
+        this.name = name;
     }
- 
-    public String getVariantName() {
-        return variantName;
+
+    public String getDescription() {
+        return description;
     }
- 
-    public void setVariantName(String variantName) {
-        this.variantName = variantName;
+
+    public void setDescription(String description) {
+        this.description = description;
     }
- 
-    public String getVariantValue() {
-        return variantValue;
-    }
- 
-    public void setVariantValue(String variantValue) {
-        this.variantValue = variantValue;
-    }
- 
 }
