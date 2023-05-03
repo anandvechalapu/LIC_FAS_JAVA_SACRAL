@@ -1,55 +1,66 @@
 package com.lic.epgs.proposal.proposalmakercontroller.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Proposal {
-  @Id
-  private int proposalNumber;
-  private String proposalName;
-  private String proposalDescription;
-  private String proposalCategory;
-  private int amount;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long proposalId;
+	
+	private String userId;
+	
+	private String status;
+	
+	private String document;
+	
+	public Proposal() {
+		
+	}
+	
+	public Proposal(Long proposalId, String userId, String status, String document) {
+		this.proposalId = proposalId;
+		this.userId = userId;
+		this.status = status;
+		this.document = document;
+	}
 
-  public int getProposalNumber() {
-    return proposalNumber;
-  }
+	public Long getProposalId() {
+		return proposalId;
+	}
 
-  public void setProposalNumber(int proposalNumber) {
-    this.proposalNumber = proposalNumber;
-  }
+	public void setProposalId(Long proposalId) {
+		this.proposalId = proposalId;
+	}
 
-  public String getProposalName() {
-    return proposalName;
-  }
+	public String getUserId() {
+		return userId;
+	}
 
-  public void setProposalName(String proposalName) {
-    this.proposalName = proposalName;
-  }
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
-  public String getProposalDescription() {
-    return proposalDescription;
-  }
+	public String getStatus() {
+		return status;
+	}
 
-  public void setProposalDescription(String proposalDescription) {
-    this.proposalDescription = proposalDescription;
-  }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-  public String getProposalCategory() {
-    return proposalCategory;
-  }
+	public String getDocument() {
+		return document;
+	}
 
-  public void setProposalCategory(String proposalCategory) {
-    this.proposalCategory = proposalCategory;
-  }
-
-  public int getAmount() {
-    return amount;
-  }
-
-  public void setAmount(int amount) {
-    this.amount = amount;
-  }
+	public void setDocument(String document) {
+		this.document = document;
+	}
+	
+	
 
 }
