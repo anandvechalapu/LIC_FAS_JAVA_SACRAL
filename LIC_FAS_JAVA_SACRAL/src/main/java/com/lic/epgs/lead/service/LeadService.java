@@ -1,33 +1,52 @@
 package com.lic.epgs.lead.service;
 
-import java.util.Optional;
-
+import com.lic.epgs.lead.entity.LeadBasicDetailEntity;
+import com.lic.epgs.lead.entity.LeadChannelDetailsEntity;
+import com.lic.epgs.lead.entity.LeadNotesActiveEntity;
+import com.lic.epgs.lead.entity.LeadProductDetailsEntity;
+import com.lic.epgs.lead.repository.LeadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lic.epgs.lead.model.Lead;
-import com.lic.epgs.lead.repository.LeadRepository;
-
 @Service
 public class LeadService {
-	
-	@Autowired
-	private LeadRepository leadRepository;
-	
-	public Lead existingSearchByLeadName_LEAD(String leadName) {
-		return leadRepository.existingSearchByLeadName_LEAD(leadName);
-	}
-	
-	public Optional<Lead> getLeadById(Long leadId) {
-		return leadRepository.findById(leadId);
-	}
-	
-	public Lead saveLead(Lead lead) {
-		return leadRepository.save(lead);
-	}
-	
-	public void deleteLead(Lead lead) {
-		leadRepository.delete(lead);
-	}
 
+    @Autowired
+    LeadRepository leadRepository;
+
+    public LeadBasicDetailEntity saveLeadBasicDetail(String leadId, String modifiedBy, String leadStatus, String leadSubStatus, String workflowStatus) {
+        return leadRepository.save(leadId, modifiedBy, leadStatus, leadSubStatus, workflowStatus);
+    }
+
+    public LeadProductDetailsEntity saveLeadProductDetails(String leadId, String productName, String productType) {
+        return leadRepository.save(leadId, productName, productType);
+    }
+
+    public LeadChannelDetailsEntity saveLeadChannelDetails(String leadId, String channelName, String channelType) {
+        return leadRepository.save(leadId, channelName, channelType);
+    }
+
+    public LeadNotesActiveEntity saveLeadNotesActive(String leadId, String note, String createdBy) {
+        return leadRepository.save(leadId, note, createdBy);
+    }
+
+    public LeadBasicDetailEntity getLeadBasicDetail(String leadId) {
+        return leadRepository.findByLeadId(leadId);
+    }
+
+    public LeadProductDetailsEntity getLeadProductDetails(String leadId, String productName, String productType) {
+        return leadRepository.findByLeadIdAndProductNameAndProductType(leadId, productName, productType);
+    }
+
+    public LeadChannelDetailsEntity getLeadChannelDetails(String leadId, String channelName, String channelType) {
+        return leadRepository.findByLeadIdAndChannelNameAndChannelType(leadId, channelName, channelType);
+    }
+
+    public LeadNotesActiveEntity getLeadNotesActive(String leadId, String note, String createdBy) {
+        return leadRepository.findByLeadIdAndNoteAndCreatedBy(leadId, note, createdBy);
+    }
+
+    public void deleteLead(String leadId) {
+        leadRepository.deleteByLeadId(leadId);
+    }
 }
