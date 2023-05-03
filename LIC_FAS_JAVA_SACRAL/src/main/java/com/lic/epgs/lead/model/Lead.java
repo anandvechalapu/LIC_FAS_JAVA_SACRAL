@@ -4,17 +4,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="lead")
 public class Lead {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-
-	private String unitCode;
-
-	private String createdBy;
+	
+	private String leadName;
+	
+	private String status;
 
 	public Long getId() {
 		return id;
@@ -24,20 +26,21 @@ public class Lead {
 		this.id = id;
 	}
 
-	public String getUnitCode() {
-		return unitCode;
+	public String getLeadName() {
+		return leadName;
 	}
 
-	public void setUnitCode(String unitCode) {
-		this.unitCode = unitCode;
+	public void setLeadName(String leadName) {
+		this.leadName = leadName;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-
+	
+	
 }
