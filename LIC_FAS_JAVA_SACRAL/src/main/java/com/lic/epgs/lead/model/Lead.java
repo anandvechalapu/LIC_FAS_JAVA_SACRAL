@@ -4,43 +4,54 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="lead")
 public class Lead {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
-	private String leadName;
-	
-	private String status;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String createdBy;
+    private String channel;
 
-	public Long getId() {
-		return id;
-	}
+    public Lead() {}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Lead(String name, String createdBy, String channel) {
+        this.name = name;
+        this.createdBy = createdBy;
+        this.channel = channel;
+    }
 
-	public String getLeadName() {
-		return leadName;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setLeadName(String leadName) {
-		this.leadName = leadName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-	
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
 }
