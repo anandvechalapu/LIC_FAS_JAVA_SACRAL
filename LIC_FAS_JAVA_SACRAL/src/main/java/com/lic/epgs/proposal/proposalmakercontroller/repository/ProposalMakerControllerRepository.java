@@ -17,41 +17,24 @@ import com.lic.epgs.proposal.proposalmakercontroller.model.ContactDetailDto;
 import com.lic.epgs.proposal.proposalmakercontroller.model.AddressDetailsDto;
 
 @Repository
-public interface ProposalMakerControllerRepository extends JpaRepository<ProposalMakerController, Long> {
-	
-	ProposalBasicDetailsDto getProposalDetailsByProposalNumber(String proposalNumber); 
-	
-	ProposalChannelDetailsDto getProposalChannelDetailsByProposalNumber(String proposalNumber);
-	
-	ProposalProductDetailsDto getProposalProductDetailsByProposalNumber(String proposalNumber);
-	
-	MphDetailsDto getMphDetailsByProposalNumber(String proposalNumber);
-	
-	CustomerDetailsDto getCustomerDetailsByProposalNumber(String proposalNumber);
-	
-	SubCustomerDetailsDto getSubCustomerDetailsByProposalNumber(String proposalNumber);
-	
-	CustomerTrustDetailsDto getCustomerTrustDetailsByProposalNumber(String proposalNumber);
-	
-	GroupCustomerBasicDetailsDto getGroupCustomerBasicDetailsByProposalNumber(String proposalNumber);
-	
-	ProposalNotesDto getProposalNotesByProposalNumber(String proposalNumber);
-	
-	BankAccountDetailsDto getCustomerBankAccountDetailsByProposalNumber(String proposalNumber);
-	
-	ContactDetailDto getCustomerContactPersonDetailsByProposalNumber(String proposalNumber);
-	
-	AddressDetailsDto getCustomerAddressDetailsByProposalNumber(String proposalNumber);
-	
-	AddressDetailsDto getSubCustomerAddressDetailsByProposalNumber(String proposalNumber);
-	
-	ContactDetailDto getSubCustomerContactPersonDetailsByProposalNumber(String proposalNumber);
-	
-	BankAccountDetailsDto getSubCustomerBankAccountDetailsByProposalNumber(String proposalNumber);
-	
-	BankAccountDetailsDto getTrustBankAccountDetailsByProposalNumber(String proposalNumber);
-	
-	ContactDetailDto getTrustContactPersonDetailsByProposalNumber(String proposalNumber);
-	
-	AddressDetailsDto getTrustAddressDetailsByProposalNumber(String proposalNumber);
+public interface ProposalMakerControllerRepository extends JpaRepository<ProposalBasicDetailsDto, Long> {
+ 
+    ProposalBasicDetailsDto getProposalDetailsByProposalNumber(String proposalNumber);
+    ProposalChannelDetailsDto getProposalChannelDetailsByProposalNumber(String proposalNumber);
+    ProposalProductDetailsDto getProposalProductDetailsByProposalNumber(String proposalNumber);
+    MphDetailsDto getMphDetailsByProposalNumber(String proposalNumber);
+    CustomerDetailsDto getCustomerDetailsByProposalNumber(String proposalNumber);
+    SubCustomerDetailsDto getSubCustomerDetailsByProposalNumber(String proposalNumber);
+    CustomerTrustDetailsDto getCustomerTrustDetailsByProposalNumber(String proposalNumber);
+    GroupCustomerBasicDetailsDto getGroupCustomerBasicDetailsByProposalNumber(String proposalNumber);
+    ProposalNotesDto getProposalNotesByProposalNumber(String proposalNumber);
+    BankAccountDetailsDto getBankAccountDetailsByProposalNumber(String proposalNumber);
+    ContactDetailDto getContactDetailByProposalNumber(String proposalNumber);
+    AddressDetailsDto getAddressDetailsByProposalNumber(String proposalNumber);
+    AddressDetailsDto getSubCustomerAddressDetailsByProposalNumber(String proposalNumber);
+    ContactDetailDto getSubCustomerContactDetailByProposalNumber(String proposalNumber);
+    BankAccountDetailsDto getSubCustomerBankAccountDetailsByProposalNumber(String proposalNumber);
+    BankAccountDetailsDto getTrustBankAccountDetailsByProposalNumber(String proposalNumber);
+    ContactDetailDto getTrustContactDetailByProposalNumber(String proposalNumber);
+    AddressDetailsDto getTrustAddressDetailsByProposalNumber(String proposalNumber);
 }
