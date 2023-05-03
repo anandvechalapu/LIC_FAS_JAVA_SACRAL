@@ -1,14 +1,9 @@
 package com.lic.epgs.proposal.proposalmakercontroller.service;
 
-import com.lic.epgs.proposal.proposalmakercontroller.model.ProductVariant;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import com.lic.epgs.proposal.proposalmakercontroller.entity.MPHContactPersonDetailTempEntity;
 
-import java.util.List;
-
-public interface ProductVariantListService {
-
-    List<ProductVariant> getProductVariantList_PROPOSALMAKERCONTROLLER13(Long productId);
+public interface RemoveContactPersonDetailsService {
+    public MPHContactPersonDetailTempEntity findByContactPersonIdAndProposalId(Long contactPersonId, Long proposalId);
+    public void deleteByContactPersonIdAndProposalId(Long contactPersonId, Long proposalId);
 
 }
