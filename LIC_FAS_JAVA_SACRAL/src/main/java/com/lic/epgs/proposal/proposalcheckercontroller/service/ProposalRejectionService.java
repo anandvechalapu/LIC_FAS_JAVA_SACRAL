@@ -1,6 +1,6 @@
 package com.lic.epgs.proposal.proposalcheckercontroller.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,39 +10,54 @@ import com.lic.epgs.proposal.proposalcheckercontroller.repository.ProposalReject
 
 @Service
 public class ProposalRejectionService {
+
 	@Autowired
 	private ProposalRejectionRepository proposalRejectionRepository;
-	
-	public ProposalRejection findByProposalId(Long proposalId) {
-		return proposalRejectionRepository.findByProposalId(proposalId);
+
+	public ProposalRejection findByProposalId(String proposalId) {
+		Optional<ProposalRejection> proposalRejection = proposalRejectionRepository.findByProposalId(proposalId);
+		return proposalRejection.orElse(null);
 	}
-	
-	public List<ProposalRejection> findByStatusAndWorkFlowStatus(String status, String workFlowStatus) {
-		return proposalRejectionRepository.findByStatusAndWorkFlowStatus(status, workFlowStatus);
+
+	public void updateProposalStatusToRejectedAndWorkFlowStatusToRejected(String proposalId) {
+		ProposalRejection proposalRejection = proposalRejectionRepository.findByProposalId(proposalId);
+		if (proposalRejection != null) {
+			proposalRejection.setProposalStatus("Rejected");
+			proposalRejection.setWorkFlowStatus("Rejected");
+			proposalRejectionRepository.save(proposalRejection);
+		}
 	}
-	
-	public void updateProposalStatusAndWorkFlowStatus(String status, String workFlowStatus, Long proposalId) {
-		proposalRejectionRepository.updateProposalStatusAndWorkFlowStatus(status, workFlowStatus, proposalId);
+
+	public void updateRejectionRemarkForProposal(String rejectionRemark, String proposalId) {
+		ProposalRejection proposalRejection = proposalRejectionRepository.findByProposalId(proposalId);
+		if (proposalRejection != null) {
+			proposalRejection.setRejectionRemark(rejectionRemark);
+			proposalRejectionRepository.save(proposalRejection);
+		}
 	}
-	
-	public void updateProposalRemarks(String remarks, Long proposalId) {
-		proposalRejectionRepository.updateProposalRemarks(remarks, proposalId);
+
+	public void markProposalAsInactiveAndCreateNewVersionWithUpdatedStatus(String proposalId) {
+		ProposalRejection proposalRejection = proposalRejectionRepository.findByProposalId(proposalId);
+		if (proposalRejection != null) {
+			proposalRejection.setActive(false);
+			proposalRejectionRepository.save(proposalRejection);
+			// Create new version
+			ProposalRejection newVersionProposalRejection = new ProposalRejection();
+			// Set the fields
+			newVersionProposalRejection.setProposalId(proposalId);
+			newVersionProposalRejection.setProposalStatus("Rejected");
+			newVersionProposalRejection.setWorkFlowStatus("Rejected");
+			newVersionProposalRejection.setActive(true);
+			proposalRejectionRepository.save(newVersionProposalRejection);
+		}
 	}
-	
-	public void markProposalInactive(Long proposalId) {
-		proposalRejectionRepository.markProposalInactive(proposalId);
+
+	public void updateProposalInAllRelatedTables(String proposalId) {
+		// TODO: Implement method to update proposal in all related tables
 	}
-	
-	public void createNewVersionOfProposal(Long proposalId) {
-		proposalRejectionRepository.createNewVersionOfProposal(proposalId);
+
+	public void copyNotesAssociatedWithProposalToNewProposalVersion(String proposalId) {
+		// TODO: Implement method to copy notes associated with the proposal to new proposal version
 	}
-	
-	public void updateRelatedTables(Long proposalId) {
-		proposalRejectionRepository.updateRelatedTables(proposalId);
-	}
-	
-	public void copyNotesToNewProposalVersion(Long proposalId) {
-		proposalRejectionRepository.copyNotesToNewProposalVersion(proposalId);
-	}
-	
+
 }
