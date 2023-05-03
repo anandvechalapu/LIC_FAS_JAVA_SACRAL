@@ -1,47 +1,50 @@
+package com.lic.epgs.proposal.proposalmakercontroller.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Product {
-	
-	private Long id;
-	private String productName;
-	private String productType;
-	private Double productPrice;
-	
-	public Product() {}
-	
-	public Product(String productName, String productType, Double productPrice) {
-		this.productName = productName;
-		this.productType = productType;
-		this.productPrice = productPrice;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public String getProductName() {
-		return productName;
-	}
-	
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-	
-	public String getProductType() {
-		return productType;
-	}
-	
-	public void setProductType(String productType) {
-		this.productType = productType;
-	}
-	
-	public Double getProductPrice() {
-		return productPrice;
-	}
-	
-	public void setProductPrice(Double productPrice) {
-		this.productPrice = productPrice;
-	}
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long productId;
+    private String productName;
+    private String productDescription;
+    private String productVariantId;
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public String getProductVariantId() {
+        return productVariantId;
+    }
+
+    public void setProductVariantId(String productVariantId) {
+        this.productVariantId = productVariantId;
+    }
+    
 }
