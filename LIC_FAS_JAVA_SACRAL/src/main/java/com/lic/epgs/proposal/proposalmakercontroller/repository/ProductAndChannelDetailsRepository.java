@@ -1,12 +1,10 @@
-import org.springframework.data.jpa.repository.JpaRepository;
+@Repository
+public interface ProductAndChannelDetailsRepository extends CrudRepository<ProductAndChannelDetails, Long> {
 
-import com.lic.epgs.proposal.proposalmakercontroller.model.ProductAndChannelDetails;
+    // Method to get all product and channel details associated with a lead
+    List<ProductAndChannelDetails> findByLeadId(long leadId);
 
-public interface ProductAndChannelDetailsRepository extends JpaRepository<ProductAndChannelDetails, Long> {
+    // Method to get a product and channel detail associated with a lead
+    ProductAndChannelDetails findByLeadIdAndProductIdAndChannelId(long leadId, long productId, long channelId);
 
-	public ProductAndChannelDetails getProductAndChannelDetailsByLeadId(Long leadId);
-	
-	public List<ProductAndChannelDetails> getProductAndChannelDetailsByLeadIds(List<Long> leadIds);
-	
-	public List<ProductAndChannelDetails> findAllByLeadId(Long leadId);
 }
