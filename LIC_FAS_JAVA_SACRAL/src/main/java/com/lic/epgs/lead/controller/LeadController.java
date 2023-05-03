@@ -1,56 +1,65 @@
+//Generated Spring boot Controller class
+
 package com.lic.epgs.lead.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lic.epgs.lead.model.Lead;
+import com.lic.epgs.lead.entity.LeadBasicDetailEntity;
+import com.lic.epgs.lead.entity.LeadChannelDetailsEntity;
+import com.lic.epgs.lead.entity.LeadNotesActiveEntity;
+import com.lic.epgs.lead.entity.LeadProductDetailsEntity;
+import com.lic.epgs.lead.model.LeadBasicDetailModel;
 import com.lic.epgs.lead.service.LeadService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/lead")
+@RequestMapping("/leads")
 public class LeadController {
-	
-	@Autowired
-	private LeadService leadService;
-	
-	@GetMapping("/{leadName}")
-	public ResponseEntity<Lead> existingSearchByLeadName_LEAD(@PathVariable String leadName) {
-		Lead lead = leadService.existingSearchByLeadName_LEAD(leadName);
-		return new ResponseEntity<Lead>(lead, HttpStatus.OK);
-	}
-	
-	@GetMapping("/{leadId}")
-	public ResponseEntity<Lead> getLeadById(@PathVariable Long leadId) {
-		Optional<Lead> lead = leadService.getLeadById(leadId);
-		if (lead.isPresent()) {
-			return new ResponseEntity<Lead>(lead.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Lead>(HttpStatus.NOT_FOUND);
-		}
-	}
-	
-	@PostMapping
-	public ResponseEntity<Lead> saveLead(@RequestBody Lead lead) {
-		Lead savedLead = leadService.saveLead(lead);
-		return new ResponseEntity<Lead>(savedLead, HttpStatus.CREATED);
-	}
-	
-	@PostMapping("/{leadId}")
-	public ResponseEntity<Lead> deleteLead(@PathVariable Long leadId) {
-		Optional<Lead> lead = leadService.getLeadById(leadId);
-		if (lead.isPresent()) {
-			leadService.deleteLead(lead.get());
-			return new ResponseEntity<Lead>(HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Lead>(HttpStatus.NOT_FOUND);
-		}
-	}
 
+    @Autowired
+    LeadService leadService;
+
+    @PostMapping("/basic")
+    public LeadBasicDetailEntity saveLeadBasicDetail(@RequestBody LeadBasicDetailModel leadBasicDetailModel) {
+        return leadService.saveLeadBasicDetail(leadBasicDetailModel.getLeadId(), leadBasicDetailModel.getModifiedBy(), leadBasicDetailModel.getLeadStatus(), leadBasicDetailModel.getLeadSubStatus(), leadBasicDetailModel.getWorkflowStatus());
+    }
+
+    @PostMapping("/products")
+    public LeadProductDetailsEntity saveLeadProductDetails(String leadId, String productName, String productType) {
+        return leadService.saveLeadProductDetails(leadId, productName, productType);
+    }
+
+    @PostMapping("/channels")
+    public LeadChannelDetailsEntity saveLeadChannelDetails(String leadId, String channelName, String channelType) {
+        return leadService.saveLeadChannelDetails(leadId, channelName, channelType);
+    }
+
+    @PostMapping("/notes")
+    public LeadNotesActiveEntity saveLeadNotesActive(String leadId, String note, String createdBy) {
+        return leadService.saveLeadNotesActive(leadId, note, createdBy);
+    }
+
+    @GetMapping("/{leadId}")
+    public LeadBasicDetailEntity getLeadBasicDetail(@PathVariable("leadId") String leadId) {
+        return leadService.getLeadBasicDetail(leadId);
+    }
+
+    @GetMapping("/products/{leadId}")
+    public LeadProductDetailsEntity getLeadProductDetails(@PathVariable("leadId") String leadId, String productName, String productType) {
+        return leadService.getLeadProductDetails(leadId, productName, productType);
+    }
+
+    @GetMapping("/channels/{leadId}")
+    public LeadChannelDetailsEntity getLeadChannelDetails(@PathVariable("leadId") String leadId, String channelName, String channelType) {
+        return leadService.getLeadChannelDetails(leadId, channelName, channelType);
+    }
+
+    @GetMapping("/notes/{leadId}")
+    public LeadNotesActiveEntity getLeadNotesActive(@PathVariable("leadId") String leadId, String note, String createdBy) {
+        return leadService.getLeadNotesActive(leadId, note, createdBy);
+    }
+
+    @DeleteMapping("/{leadId}")
+    public void deleteLead(@PathVariable("leadId") String leadId) {
+        leadService.deleteLead(leadId);
+    }
 }
