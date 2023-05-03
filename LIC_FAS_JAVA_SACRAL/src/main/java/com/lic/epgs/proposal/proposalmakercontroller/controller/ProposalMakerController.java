@@ -1,24 +1,4 @@
-package com.lic.epgs.proposal.proposalmakercontroller.repository;
-
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
-
-import com.lic.epgs.proposal.proposalmakercontroller.model.GetProductSubVariantNameList;
-
-@Repository
-public interface GetProductSubVariantNameListRepository  extends JpaRepository<GetProductSubVariantNameList, Long>{
-	
-	@Query(value ="SELECT * FROM GetProductSubVariantNameList WHERE productVariantId=?1" , nativeQuery = true)
-	public List<GetProductSubVariantNameList> getProductSubVariantNameList_PROPOSALMAKERCONTROLLER12(Long productVariantId);
-
-}
-
 package com.lic.epgs.proposal.proposalmakercontroller.controller;
-
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,19 +6,44 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lic.epgs.proposal.proposalmakercontroller.model.GetProductSubVariantNameList;
-import com.lic.epgs.proposal.proposalmakercontroller.service.GetProductSubVariantNameListService;
+import com.lic.epgs.proposal.proposalmakercontroller.model.ProposalDetails;
+import com.lic.epgs.proposal.proposalmakercontroller.service.GetProposalDetailsForIntegrationService;
 
 @RestController
-@RequestMapping(value="/proposalmakercontroller")
+@RequestMapping("/proposal")
 public class ProposalMakerController {
-	
-	@Autowired
-	private GetProductSubVariantNameListService getProductSubVariantNameListService;
-	
-	@GetMapping("/getProductSubVariantNameList/{productVariantId}")
-	public List<GetProductSubVariantNameList> getProductSubVariantNameList_PROPOSALMAKERCONTROLLER12(@PathVariable Long productVariantId){
-		return getProductSubVariantNameListService.getProductSubVariantNameList_PROPOSALMAKERCONTROLLER12(productVariantId);
-	}
+
+  @Autowired
+  private GetProposalDetailsForIntegrationService getProposalDetailsForIntegrationService;
+
+  // Get Proposal Customer Basic Details
+  @GetMapping("/customer/{proposalNumber}")
+  public ProposalDetails getProposalCustomerBasicDetails(@PathVariable String proposalNumber) {
+    return getProposalDetailsForIntegrationService.getProposalCustomerBasicDetails(proposalNumber);
+  }
+
+  // Get Proposal Channel Details
+  @GetMapping("/channel/{proposalNumber}")
+  public ProposalDetails getProposalChannelDetails(@PathVariable String proposalNumber) {
+    return getProposalDetailsForIntegrationService.getProposalChannelDetails(proposalNumber);
+  }
+
+  // Get Proposal Address, Contact and Bank Details
+  @GetMapping("/contact/{proposalNumber}")
+  public ProposalDetails getProposalAddressContactBankDetails(@PathVariable String proposalNumber) {
+    return getProposalDetailsForIntegrationService.getProposalAddressContactBankDetails(proposalNumber);
+  }
+
+  // Get Proposal Basic Details
+  @GetMapping("/basic/{proposalNumber}")
+  public ProposalDetails getProposalBasicDetails(@PathVariable String proposalNumber) {
+    return getProposalDetailsForIntegrationService.getProposalBasicDetails(proposalNumber);
+  }
+
+  // Get Success/Failure response with a message
+  @GetMapping("/response/{proposalNumber}")
+  public ProposalDetails getSuccessFailureResponseMessage(@PathVariable String proposalNumber) {
+    return getProposalDetailsForIntegrationService.getSuccessFailureResponseMessage(proposalNumber);
+  }
 
 }
