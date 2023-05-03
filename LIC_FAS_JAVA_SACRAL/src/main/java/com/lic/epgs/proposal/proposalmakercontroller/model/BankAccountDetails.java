@@ -1,71 +1,80 @@
 package com.lic.epgs.proposal.proposalmakercontroller.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "bank_account_details")
 public class BankAccountDetails {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "bank_account_id")
-  private Long bankAccountId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private  String accountName;
+    private  String accountNumber;
+    private  String ifscCode;
+    private  String bankName;
+    private  String bankBranch;
 
-  @Column(name = "proposal_id")
-  private Long proposalId;
+    public BankAccountDetails() {
+    }
 
-  @Column(name = "account_number")
-  private String accountNumber;
+    public BankAccountDetails(String accountName, String accountNumber, String ifscCode, String bankName, String bankBranch) {
+        this.accountName = accountName;
+        this.accountNumber = accountNumber;
+        this.ifscCode = ifscCode;
+        this.bankName = bankName;
+        this.bankBranch = bankBranch;
+    }
 
-  @Column(name = "bank_name")
-  private String bankName;
+    public Long getId() {
+        return id;
+    }
 
-  @Column(name = "ifsc_code")
-  private String ifscCode;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public Long getBankAccountId() {
-    return bankAccountId;
-  }
+    public String getAccountName() {
+        return accountName;
+    }
 
-  public void setBankAccountId(Long bankAccountId) {
-    this.bankAccountId = bankAccountId;
-  }
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
 
-  public Long getProposalId() {
-    return proposalId;
-  }
+    public String getAccountNumber() {
+        return accountNumber;
+    }
 
-  public void setProposalId(Long proposalId) {
-    this.proposalId = proposalId;
-  }
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 
-  public String getAccountNumber() {
-    return accountNumber;
-  }
+    public String getIfscCode() {
+        return ifscCode;
+    }
 
-  public void setAccountNumber(String accountNumber) {
-    this.accountNumber = accountNumber;
-  }
+    public void setIfscCode(String ifscCode) {
+        this.ifscCode = ifscCode;
+    }
 
-  public String getBankName() {
-    return bankName;
-  }
+    public String getBankName() {
+        return bankName;
+    }
 
-  public void setBankName(String bankName) {
-    this.bankName = bankName;
-  }
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
 
-  public String getIfscCode() {
-    return ifscCode;
-  }
+    public String getBankBranch() {
+        return bankBranch;
+    }
 
-  public void setIfscCode(String ifscCode) {
-    this.ifscCode = ifscCode;
-  }
-
+    public void setBankBranch(String bankBranch) {
+        this.bankBranch = bankBranch;
+    }
+    
+    
 }
