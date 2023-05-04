@@ -1,47 +1,44 @@
-// TrustService.java
-
 package com.lic.epgs.trust.service;
 
+import com.lic.epgs.trust.dto.TrustDetailsDto;
+import com.lic.epgs.trust.entity.BankAccountDetailsEntity;
+import com.lic.epgs.trust.entity.BankAccountDetailsTempEntity;
+import com.lic.epgs.trust.entity.ContactDetailsTempEntity;
+import com.lic.epgs.trust.entity.TrustDetailsTempEntity;
+import com.lic.epgs.trust.repository.TrustRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.lic.epgs.trust.model.TrustDetails;
-import com.lic.epgs.trust.repository.TrustRepository;
+
+import java.util.List;
 
 @Service
 public class TrustService {
-    
+
     @Autowired
     private TrustRepository trustRepository;
-    
-    // Method to retrieve trust details in the temporary table
-    public TrustDetails findByTrustId(Long trustId) {
+
+    public TrustDetailsTempEntity findByTrustId(Long trustId) {
         return trustRepository.findByTrustId(trustId);
     }
-    
-    // Method to retrieve bank account details in the temporary table associated with the trustId
-    public TrustDetails findByTrustIdAndBankAccountId(Long trustId, Long bankAccountId) {
-        return trustRepository.findByTrustIdAndBankAccountId(trustId, bankAccountId);
+
+    public List<BankAccountDetailsTempEntity> findByTrustIdAndIsActive(Long trustId, Boolean isActive) {
+        return trustRepository.findByTrustIdAndIsActive(trustId, isActive);
     }
-    
-    // Method to retrieve contact details in the temporary table associated with the trustId
-    public TrustDetails findByTrustIdAndContactPersonId(Long trustId, Long contactPersonId) {
-        return trustRepository.findByTrustIdAndContactPersonId(trustId, contactPersonId);
+
+    public BankAccountDetailsEntity save(BankAccountDetailsEntity bankAccountDetailsEntity) {
+        return trustRepository.save(bankAccountDetailsEntity);
     }
-    
-    // Method to retrieve address details in the temporary table associated with the trustId
-    public TrustDetails findByTrustIdAndAddressId(Long trustId, Long addressId) {
-        return trustRepository.findByTrustIdAndAddressId(trustId, addressId);
+
+    public List<ContactDetailsTempEntity> findContactDetailsTempEntityByTrustIdAndIsActive(Long trustId, Boolean isActive) {
+        return trustRepository.findContactDetailsTempEntityByTrustIdAndIsActive(trustId, isActive);
     }
-    
-    // Method to save the newly created trust details entity in the temporary table
-    public TrustDetails save(TrustDetails trustDetails) {
-        return trustRepository.save(trustDetails);
+
+    public TrustDetailsTempEntity save(TrustDetailsTempEntity trustDetailsTempEntity) {
+        return trustRepository.save(trustDetailsTempEntity);
     }
-    
-    // Method to update the trust details entity in the temporary table
-    public TrustDetails updateTrustDetails(Long trustId, String role) {
-        TrustDetails trustDetails = trustRepository.findByTrustId(trustId);
-        trustDetails.setRole(role);
-        return trustRepository.save(trustDetails);
+
+    public TrustDetailsTempEntity saveTrustDetails(TrustDetailsDto trustDetailsDto, String role) {
+        return trustRepository.saveTrustDetails(trustDetailsDto, role);
     }
+
 }
