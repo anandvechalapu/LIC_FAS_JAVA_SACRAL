@@ -1,29 +1,56 @@
+package com.lic.epgs.trust.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.Column;
+
 @Entity
-@Table(name = "common_trust_dto")
-@Data
-@EqualsAndHashCode(callSuper = false)
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Builder
-@EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
-public class CommonTrustDto extends AbstractAuditingEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "trust_code")
-    private String trustCode;
-
-    @Column(name = "unit_code")
-    private String unitCode;
-
-    @Column(name = "status")
-    private String status;
-
-    @Column(name = "transaction_message")
-    private String transactionMessage;
-
+@Table(name = "CommonTrustDto")
+public class CommonTrustDto {
+	
+	@Id
+	@Column(name = "id")
+	private Long id;
+	
+	@Column(name = "role")
+	private String role;
+	
+	@Column(name = "unitCode")
+	private String unitCode;
+	
+	@Column(name = "status")
+	private String status;
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
+	public String getUnitCode() {
+		return unitCode;
+	}
+	
+	public void setUnitCode(String unitCode) {
+		this.unitCode = unitCode;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }
