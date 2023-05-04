@@ -1,64 +1,32 @@
 package com.lic.epgs.trust.service;
 
+import com.lic.epgs.trust.entity.ContactEntityList;
+import com.lic.epgs.trust.dto.CommonTrustDto;
+import com.lic.epgs.trust.dto.ContactDetailsDto;
+import com.lic.epgs.trust.repository.TrustContactDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lic.epgs.trust.entity.TrustContactDetails;
-import com.lic.epgs.trust.repository.TrustContactDetailsRepository;
+import java.util.List;
 
 @Service
 public class TrustContactDetailsService {
 
     @Autowired
-    private TrustContactDetailsRepository trustContactDetailsRepo;
+    private TrustContactDetailsRepository trustContactDetailsRepository;
 
-    /**
-     * Finds trust contact details by trust ID.
-     * 
-     * @param trustId The trust ID.
-     * @return The trust contact details.
-     */
-    public TrustContactDetails findByTrustId(Long trustId) {
-        return trustContactDetailsRepo.findByTrustId(trustId);
+    public CommonTrustDto listTrustContacts(Long trustId) {
+        List<ContactEntityList> contactEntityList = trustContactDetailsRepository.findAllByTrustId(trustId);
+        return new CommonTrustDto(trustId, contactEntityList);
     }
 
-    /**
-     * Finds trust contact details by contact person ID.
-     * 
-     * @param contactPersonId The contact person ID.
-     * @return The trust contact details.
-     */
-    public TrustContactDetails findByContactPersonId(Long contactPersonId) {
-        return trustContactDetailsRepo.findByContactPersonId(contactPersonId);
+    public ContactDetailsDto saveContactDetails(ContactEntityList contactEntityList) {
+        contactEntityList = trustContactDetailsRepository.save(contactEntityList);
+        return new ContactDetailsDto(contactEntityList);
     }
 
-    /**
-     * Saves the trust contact details.
-     * 
-     * @param trustContactDetails The trust contact details.
-     * @return The saved trust contact details.
-     */
-    public TrustContactDetails save(TrustContactDetails trustContactDetails) {
-        return trustContactDetailsRepo.save(trustContactDetails);
-    }
-
-    /**
-     * Updates the trust contact details.
-     * 
-     * @param trustContactDetails The trust contact details.
-     * @return The updated trust contact details.
-     */
-    public TrustContactDetails update(TrustContactDetails trustContactDetails) {
-        return trustContactDetailsRepo.update(trustContactDetails);
-    }
-
-    /**
-     * Deletes the trust contact details.
-     * 
-     * @param trustContactDetails The trust contact details.
-     */
-    public void delete(TrustContactDetails trustContactDetails) {
-        trustContactDetailsRepo.delete(trustContactDetails);
+    public void deleteContactDetails(ContactEntityList contactEntityList) {
+        trustContactDetailsRepository.delete(contactEntityList);
     }
 
 }
