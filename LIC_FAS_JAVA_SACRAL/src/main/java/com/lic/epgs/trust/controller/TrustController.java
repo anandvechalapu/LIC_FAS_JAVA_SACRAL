@@ -1,33 +1,33 @@
 package com.lic.epgs.trust.controller;
 
-import com.lic.epgs.trust.dto.TrustDetailsDto;
-import com.lic.epgs.trust.entity.BankAccountDetailsEntity;
-import com.lic.epgs.trust.entity.ContactDetailEntity;
-import com.lic.epgs.trust.model.TrustDetails;
-import com.lic.epgs.trust.service.TrustService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.lic.epgs.trust.model.Trust;
+import com.lic.epgs.trust.service.TrustService;
 
 @RestController
-@RequestMapping("/trust")
+@RequestMapping(value = "/trust")
 public class TrustController {
 
-    @Autowired
-    private TrustService trustService;
+	@Autowired
+	private TrustService trustService;
 
-    @PostMapping("/details")
-    public TrustDetails getTrustDetails(@RequestBody TrustDetails trustDetails) {
-        trustDetails.setTrustDetails(trustService.getTrustDetailsTemp(trustDetails.getTrustId()));
-        trustDetails.setBankAccountDetails(trustService.getBankAccountDetailsTemp(trustDetails.getTrustId()));
-        trustDetails.setContactDetails(trustService.getContactDetailsTemp(trustDetails.getTrustId()));
-        return trustDetails;
-    }
+	@GetMapping
+	public ResponseEntity<List<Trust>> getExistingTrustDetails(@RequestParam String trustId,
+			@RequestParam String unitCode) {
+		List<Trust> existingTrustDetails = trustService.getExistingTrustDetails(trustId, unitCode);
+		if (existingTrustDetails != null) {
+			return new ResponseEntity<>(existingTrustDetails, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 
-    @PutMapping("/details")
-    public TrustDetails updateTrustDetails(@RequestBody TrustDetails trustDetails) {
-        trustDetails.setTrustDetails(trustService.saveTrustDetailsTemp((TrustDetailsDto) trustDetails.getTrustDetails()));
-        trustDetails.setBankAccountDetails(trustService.saveBankAccountDetailsTemp(trustDetails.getBankAccountDetails()));
-        trustDetails.setContactDetails(trustService.saveContactDetailsTemp(trustDetails.getContactDetails()));
-        return trustDetails;
-    }
 }
