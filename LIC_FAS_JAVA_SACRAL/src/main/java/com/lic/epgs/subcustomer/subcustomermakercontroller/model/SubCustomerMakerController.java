@@ -1,56 +1,50 @@
 package com.lic.epgs.subcustomer.subcustomermakercontroller.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class SubCustomerMakerController {
 
     @Id
-    private Long subCustomerId;
-    private Long contactPersonId;
-    private Boolean contactDetailStatus;
-    private String successMessage;
-    private String errorMessage;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String status;
+    private String workflowStatus;
+    private String mappedDetails;
 
-    public Long getSubCustomerId() {
-        return subCustomerId;
+    public Long getId() {
+        return id;
     }
 
-    public void setSubCustomerId(Long subCustomerId) {
-        this.subCustomerId = subCustomerId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getContactPersonId() {
-        return contactPersonId;
+    public String getStatus() {
+        return status;
     }
 
-    public void setContactPersonId(Long contactPersonId) {
-        this.contactPersonId = contactPersonId;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Boolean getContactDetailStatus() {
-        return contactDetailStatus;
+    public String getWorkflowStatus() {
+        return workflowStatus;
     }
 
-    public void setContactDetailStatus(Boolean contactDetailStatus) {
-        this.contactDetailStatus = contactDetailStatus;
+    public void setWorkflowStatus(String workflowStatus) {
+        this.workflowStatus = workflowStatus;
     }
 
-    public String getSuccessMessage() {
-        return successMessage;
+    public String getMappedDetails() {
+        return mappedDetails;
     }
 
-    public void setSuccessMessage(String successMessage) {
-        this.successMessage = successMessage;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMappedDetails(String mappedDetails) {
+        this.mappedDetails = mappedDetails;
     }
 
 }
