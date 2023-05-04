@@ -1,0 +1,6 @@
+@Repository
+public interface SaveUnitDetails_SUBCUSTOMERMAKERCONTROLLER18Repository extends JpaRepository<CustomerUnitOfficeTempEntity, Long> {
+    CustomerUnitOfficeTempEntity findByCustomerIdAndSubCustomerIdAndSourceUnitIdAndChannelColorCodeAndChannelUserIdAndFromDateAndToDateAndCreatedByAndModifiedByAndActiveState(Long customerId, Long subCustomerId, String sourceUnitId, String channelColorCode, String channelUserId, LocalDateTime fromDate, LocalDateTime toDate, String createdBy, String modifiedBy, Boolean activeState);
+    List<CustomerUnitOfficeTempEntity> findByCustomerIdAndSubCustomerIdAndSourceUnitIdAndChannelColorCodeAndChannelUserIdAndFromDateAndToDateAndCreatedByAndModifiedByAndActiveStateIn(Long customerId, Long subCustomerId, String sourceUnitId, String channelColorCode, String channelUserId, LocalDateTime fromDate, LocalDateTime toDate, String createdBy, String modifiedBy, Boolean[] activeState);
+    List<CustomerUnitOfficeTempEntity> saveAll(List<CustomerUnitOfficeTempEntity> customerUnitOfficeTempEntities);
+}
