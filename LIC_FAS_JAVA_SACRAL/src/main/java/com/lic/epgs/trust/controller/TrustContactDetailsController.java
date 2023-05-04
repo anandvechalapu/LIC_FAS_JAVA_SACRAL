@@ -1,46 +1,39 @@
 package com.lic.epgs.trust.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lic.epgs.trust.entity.TrustContactDetails;
+import com.lic.epgs.trust.entity.ContactEntityList;
+import com.lic.epgs.trust.dto.CommonTrustDto;
+import com.lic.epgs.trust.dto.ContactDetailsDto;
 import com.lic.epgs.trust.service.TrustContactDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/trust-contact-details")
+@RequestMapping("/trust/contact")
 public class TrustContactDetailsController {
 
     @Autowired
     private TrustContactDetailsService trustContactDetailsService;
 
-    @GetMapping("/find-by-trust-id")
-    public TrustContactDetails findByTrustId(@RequestParam Long trustId) {
-        return trustContactDetailsService.findByTrustId(trustId);
+    @GetMapping
+    public ResponseEntity<CommonTrustDto> listTrustContacts(@RequestParam Long trustId) {
+        CommonTrustDto commonTrustDto = trustContactDetailsService.listTrustContacts(trustId);
+        return new ResponseEntity<>(commonTrustDto, HttpStatus.OK);
     }
 
-    @GetMapping("/find-by-contact-person-id")
-    public TrustContactDetails findByContactPersonId(@RequestParam Long contactPersonId) {
-        return trustContactDetailsService.findByContactPersonId(contactPersonId);
+    @PostMapping
+    public ResponseEntity<ContactDetailsDto> saveContactDetails(@RequestBody ContactEntityList contactEntityList) {
+        ContactDetailsDto contactDetailsDto = trustContactDetailsService.saveContactDetails(contactEntityList);
+        return new ResponseEntity<>(contactDetailsDto, HttpStatus.CREATED);
     }
 
-    @PostMapping("/save")
-    public TrustContactDetails save(@RequestBody TrustContactDetails trustContactDetails) {
-        return trustContactDetailsService.save(trustContactDetails);
-    }
-
-    @PostMapping("/update")
-    public TrustContactDetails update(@RequestBody TrustContactDetails trustContactDetails) {
-        return trustContactDetailsService.update(trustContactDetails);
-    }
-
-    @PostMapping("/delete")
-    public void delete(@RequestBody TrustContactDetails trustContactDetails) {
-        trustContactDetailsService.delete(trustContactDetails);
+    @DeleteMapping
+    public ResponseEntity<Void> deleteContactDetails(@RequestBody ContactEntityList contactEntityList) {
+        trustContactDetailsService.deleteContactDetails(contactEntityList);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
