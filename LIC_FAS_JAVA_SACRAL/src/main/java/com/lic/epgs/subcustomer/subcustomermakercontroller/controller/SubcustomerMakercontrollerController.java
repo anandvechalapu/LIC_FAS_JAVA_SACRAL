@@ -1,51 +1,49 @@
 package com.lic.epgs.subcustomer.subcustomermakercontroller.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.lic.epgs.subcustomer.subcustomermakercontroller.entity.LoadInformation;
+import com.lic.epgs.subcustomer.subcustomermakercontroller.dto.AddressDetailsDto;
+import com.lic.epgs.subcustomer.subcustomermakercontroller.entity.AddressDetailsTempEntity;
+import com.lic.epgs.subcustomer.subcustomermakercontroller.model.AddressDetailsTempModel;
 import com.lic.epgs.subcustomer.subcustomermakercontroller.service.SubcustomerMakercontrollerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/load-information")
+@RequestMapping("/subcustomers/subcustomer-maker")
 public class SubcustomerMakercontrollerController {
-	
-	@Autowired
-	private SubcustomerMakercontrollerService subcustomerMakercontrollerService;
-	
-	@GetMapping("/findByRoleTypeAndUnitCode")
-	public List<LoadInformation> findByRoleTypeAndUnitCode(@RequestParam("roleType") String roleType, 
-			@RequestParam("unitCode") String unitCode) {
-		return subcustomerMakercontrollerService.findByRoleTypeAndUnitCode(roleType, unitCode);
-	}
-	
-	@GetMapping("/getExistingLoads")
-	public List<LoadInformation> getExistingLoads(@RequestParam("roleType") String roleType, 
-			@RequestParam("unitCode") String unitCode) {
-		return subcustomerMakercontrollerService.getExistingLoads(roleType, unitCode);
-	}
-	
-	@GetMapping("/getExistingLoadsNative")
-	public List<LoadInformation> getExistingLoadsNative(@RequestParam("roleType") String roleType, 
-			@RequestParam("unitCode") String unitCode) {
-		return subcustomerMakercontrollerService.getExistingLoadsNative(roleType, unitCode);
-	}
-	
-	@GetMapping("/getExistingLoadsWithCustomerInfo")
-	public List<LoadInformation> getExistingLoadsWithCustomerInfo(@RequestParam("roleType") String roleType, 
-			@RequestParam("unitCode") String unitCode) {
-		return subcustomerMakercontrollerService.getExistingLoadsWithCustomerInfo(roleType, unitCode);
-	}
-	
-	@GetMapping("/getExistingLoadCount")
-	public int getExistingLoadCount(@RequestParam("roleType") String roleType, 
-			@RequestParam("unitCode") String unitCode) {
-		return subcustomerMakercontrollerService.getExistingLoadCount(roleType, unitCode);
-	}
 
+    @Autowired
+    private SubcustomerMakercontrollerService service;
+
+    @PutMapping("/address-details")
+    public ResponseEntity<Object> updateSubCustomerAddressDetails(@Valid @RequestBody AddressDetailsTempModel addressDetailsTempModel) {
+        int status = service.updateSubCustomerAddressDetails(AddressDetailsTempEntity.builder()
+                                                                    .id(addressDetailsTempModel.getId())
+                                                                    .subcustomerId(addressDetailsTempModel.getSubcustomerId())
+                                                                    .addressType(addressDetailsTempModel.getAddressType())
+                                                                    .addressTypeName(addressDetailsTempModel.getAddressTypeName())
+                                                                    .country(addressDetailsTempModel.getCountry())
+                                                                    .state(addressDetailsTempModel.getState())
+                                                                    .district(addressDetailsTempModel.getDistrict())
+                                                                    .addressLine1(addressDetailsTempModel.getAddressLine1())
+                                                                    .addressLine2(addressDetailsTempModel.getAddressLine2())
+                                                                    .addressLine3(addressDetailsTempModel.getAddressLine3())
+                                                                    .town(addressDetailsTempModel.getTown())
+                                                                    .locality(addressDetailsTempModel.getLocality())
+                                                                    .pin(addressDetailsTempModel.getPin())
+                                                                    .gcFlag(addressDetailsTempModel.getGcFlag())
+                                                                    .printFlag(addressDetailsTempModel.getPrintFlag())
+                                                                    .createdBy(addressDetailsTempModel.getCreatedBy())
+                                                                    .modifiedBy(addressDetailsTempModel.getModifiedBy())
+                                                                    .build());
+        return new ResponseEntity<>(status, HttpStatus.OK);
+    }
+
+    @GetMapping("/address-details/{subcustomerId}")
+    public ResponseEntity<Object> findBySubcustomerId(@PathVariable Long subcustomerId) {
+        return new ResponseEntity<>(service.findBySubcustomerId(subcustomerId), HttpStatus.OK);
+    }
 }
