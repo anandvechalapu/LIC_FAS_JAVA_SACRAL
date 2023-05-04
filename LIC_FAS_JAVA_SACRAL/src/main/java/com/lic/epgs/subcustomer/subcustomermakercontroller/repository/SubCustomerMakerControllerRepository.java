@@ -1,19 +1,21 @@
-package com.lic.epgs.subcustomer.subcustomermakercontroller.repository;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.lic.epgs.subcustomer.subcustomermakercontroller.model.SubCustomerMakerController;
 
+@Repository
 public interface SubCustomerMakerControllerRepository extends JpaRepository<SubCustomerMakerController, Long> {
- 
-    @Query("SELECT s FROM SubCustomerMakerController s WHERE s.status = ?1 AND s.workflowStatus = ?2")
-    SubCustomerMakerController findByStatusAndWorkflowStatus(String status, String workflowStatus);
-    
-    @Query("UPDATE SubCustomerMakerController s SET s.status = ?1 WHERE s.id = ?2")
-    void updateStatusById(String status, Long id);
-    
-    @Query("UPDATE SubCustomerMakerController s SET s.mappedDetails = ?1 WHERE s.id = ?2")
-    void updateMappedDetailsById(String mappedDetails, Long id);
-    
+	
+	// method to send sub-customer to checker for approval
+	void sendforApproval_SUB_CUSTOMER_MAKER_CONTROLLER(SubCustomerMakerController subCustomerMakerController);
+	
+	// method to provide sub-customer details
+	void provideSubCustomerDetails(Long id, String status, String workflowStatus);
+	
+	// method to update sub-customer mapped details
+	void updateMappedDetails(SubCustomerMakerController subCustomerMakerController);
+	
+	// method to provide feedback on success or failure of operation
+	void provideFeedback(Boolean success);
+	
 }
