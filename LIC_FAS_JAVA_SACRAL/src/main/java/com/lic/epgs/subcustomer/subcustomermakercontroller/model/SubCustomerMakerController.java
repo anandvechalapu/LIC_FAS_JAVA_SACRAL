@@ -1,50 +1,76 @@
-package com.lic.epgs.subcustomer.subcustomermakercontroller.model;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 @Entity
+@Table(name = "sub_customer_maker_controller")
 public class SubCustomerMakerController {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String status;
-    private String workflowStatus;
-    private String mappedDetails;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getWorkflowStatus() {
-        return workflowStatus;
-    }
-
-    public void setWorkflowStatus(String workflowStatus) {
-        this.workflowStatus = workflowStatus;
-    }
-
-    public String getMappedDetails() {
-        return mappedDetails;
-    }
-
-    public void setMappedDetails(String mappedDetails) {
-        this.mappedDetails = mappedDetails;
-    }
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(name = "sub_customer_name")
+	private String subCustomerName;
+	
+	@Column(name = "sub_customer_status")
+	private String subCustomerStatus;
+	
+	@Column(name = "sub_customer_workflow_status")
+	private String subCustomerWorkFlowStatus;
+	
+	@Column(name = "sub_customer_mapped_details")
+	private String subCustomerMappedDetails;
+	
+	@Column(name = "sub_customer_feedback")
+	private Boolean subCustomerFeedback;
+	
+	public SubCustomerMakerController() {
+		
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public String getSubCustomerName() {
+		return subCustomerName;
+	}
+	
+	public void setSubCustomerName(String subCustomerName) {
+		this.subCustomerName = subCustomerName;
+	}
+	
+	public String getSubCustomerStatus() {
+		return subCustomerStatus;
+	}
+	
+	public void setSubCustomerStatus(String subCustomerStatus) {
+		this.subCustomerStatus = subCustomerStatus;
+	}
+	
+	public String getSubCustomerWorkFlowStatus() {
+		return subCustomerWorkFlowStatus;
+	}
+	
+	public void setSubCustomerWorkFlowStatus(String subCustomerWorkFlowStatus) {
+		this.subCustomerWorkFlowStatus = subCustomerWorkFlowStatus;
+	}
+	
+	public String getSubCustomerMappedDetails() {
+		return subCustomerMappedDetails;
+	}
+	
+	public void setSubCustomerMappedDetails(String subCustomerMappedDetails) {
+		this.subCustomerMappedDetails = subCustomerMappedDetails;
+	}
+	
+	public Boolean getSubCustomerFeedback() {
+		return subCustomerFeedback;
+	}
+	
+	public void setSubCustomerFeedback(Boolean subCustomerFeedback) {
+		this.subCustomerFeedback = subCustomerFeedback;
+	}
+	
 }
