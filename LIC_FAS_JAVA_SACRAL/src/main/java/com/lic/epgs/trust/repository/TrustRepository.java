@@ -1,27 +1,30 @@
-// TrustRepository.java
+environment
 
 package com.lic.epgs.trust.repository;
 
+import com.lic.epgs.trust.entity.BankAccountDetailsEntity;
+import com.lic.epgs.trust.entity.BankAccountDetailsTempEntity;
+import com.lic.epgs.trust.entity.ContactDetailsTempEntity;
+import com.lic.epgs.trust.dto.TrustDetailsDto;
+import com.lic.epgs.trust.entity.TrustDetailsTempEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.lic.epgs.trust.model.TrustDetails;
+import org.springframework.stereotype.Repository;
 
-public interface TrustRepository extends JpaRepository<TrustDetails, Long> {
-    
-    // Method to retrieve trust details in the temporary table
-    TrustDetails findByTrustId(Long trustId);
-    
-    // Method to retrieve bank account details in the temporary table associated with the trustId
-    TrustDetails findByTrustIdAndBankAccountId(Long trustId, Long bankAccountId);
-    
-    // Method to retrieve contact details in the temporary table associated with the trustId
-    TrustDetails findByTrustIdAndContactPersonId(Long trustId, Long contactPersonId);
-    
-    // Method to retrieve address details in the temporary table associated with the trustId
-    TrustDetails findByTrustIdAndAddressId(Long trustId, Long addressId);
-    
-    // Method to save the newly created trust details entity in the temporary table
-    TrustDetails save(TrustDetails trustDetails);
-    
-    // Method to update the trust details entity in the temporary table
-    TrustDetails updateTrustDetails(Long trustId, String role);
+import java.util.List;
+
+@Repository
+public interface TrustRepository extends JpaRepository<TrustDetailsTempEntity, Long> {
+
+    TrustDetailsTempEntity findByTrustId(Long trustId);
+
+    List<BankAccountDetailsTempEntity> findByTrustIdAndIsActive(Long trustId, Boolean isActive);
+
+    BankAccountDetailsEntity save(BankAccountDetailsEntity bankAccountDetailsEntity);
+
+    List<ContactDetailsTempEntity> findContactDetailsTempEntityByTrustIdAndIsActive(Long trustId, Boolean isActive);
+
+    TrustDetailsTempEntity save(TrustDetailsTempEntity trustDetailsTempEntity);
+
+    TrustDetailsTempEntity saveTrustDetails(TrustDetailsDto trustDetailsDto, String role);
+
 }
