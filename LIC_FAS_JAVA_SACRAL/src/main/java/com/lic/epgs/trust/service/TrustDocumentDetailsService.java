@@ -1,5 +1,7 @@
 package com.lic.epgs.trust.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,26 +12,18 @@ import com.lic.epgs.trust.repository.TrustDocumentDetailsRepository;
 public class TrustDocumentDetailsService {
 	
 	@Autowired
-	private TrustDocumentDetailsRepository trustDocumentDetailsRepository;
+	TrustDocumentDetailsRepository trustDocumentDetailsRepository;
 	
-	//method to add document details to a trust
-	public TrustDocumentDetails addDocumentDetailsToTrust(TrustDocumentDetails trustDocumentDetails) {
-		return trustDocumentDetailsRepository.addDocumentDetailsToTrust(trustDocumentDetails);
+	public List<TrustDocumentDetails> findByTrustId(Long trustId) {
+		return trustDocumentDetailsRepository.findByTrustId(trustId);
 	}
 	
-	//method to update or remove document details associated with a trust
-	public TrustDocumentDetails updateOrRemoveDocumentDetails(TrustDocumentDetails trustDocumentDetails) {
-		return trustDocumentDetailsRepository.updateOrRemoveDocumentDetails(trustDocumentDetails);
+	public TrustDocumentDetails saveTrustDocumentDetails(TrustDocumentDetails trustDocumentDetails) {
+		return trustDocumentDetailsRepository.save(trustDocumentDetails);
 	}
 	
-	//method to provide a response to the user indicating the success or failure of the request to add, update or remove document details
-	public TrustDocumentDetails getResponseForDocumentDetailsRequest(TrustDocumentDetails trustDocumentDetails) {
-		return trustDocumentDetailsRepository.getResponseForDocumentDetailsRequest(trustDocumentDetails);
+	public void deleteTrustDocumentDetails(Long documentId) {
+		trustDocumentDetailsRepository.deleteById(documentId);
 	}
-	
-	//method to log all requests to add, update or remove document details
-	public TrustDocumentDetails logDocumentDetailsRequest(TrustDocumentDetails trustDocumentDetails) {
-		return trustDocumentDetailsRepository.logDocumentDetailsRequest(trustDocumentDetails);
-	}
-	
+
 }
