@@ -1,91 +1,84 @@
-package com.lic.epgs.subcustomer.subcustomercheckercontroller.model;
-
-import javax.persistence.Entity;
+package com.lic.epgs.subcustomer.subcustomercheckercontroller.model; 
+ 
+import javax.persistence.Entity; 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Id; 
 
-@Entity
-@Table(name="sub_customer")
-public class SubCustomer {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String address;
-    private String contact;
-    private String notes;
-    private String bankAccountDetails;
-    private Long customerId;
-
-    public SubCustomer() {
-    }
-
-    public SubCustomer(String name, String address, String contact, String notes, String bankAccountDetails, Long customerId) {
-        this.name = name;
-        this.address = address;
-        this.contact = contact;
-        this.notes = notes;
-        this.bankAccountDetails = bankAccountDetails;
-        this.customerId = customerId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public String getBankAccountDetails() {
-        return bankAccountDetails;
-    }
-
-    public void setBankAccountDetails(String bankAccountDetails) {
-        this.bankAccountDetails = bankAccountDetails;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
+@Entity 
+public class SubCustomer { 
+ 
+    @Id 
+    @GeneratedValue(strategy = GenerationType.AUTO) 
+    private Long subCustomerId; 
+    private String firstName; 
+    private String lastName; 
+    private String address; 
+    private String status; 
+    private String workflowStatus; 
+ 
+    public SubCustomer() { 
+    } 
+ 
+    public SubCustomer(Long subCustomerId, 
+                       String firstName, 
+                       String lastName, 
+                       String address, 
+                       String status, 
+                       String workflowStatus) { 
+        this.subCustomerId = subCustomerId; 
+        this.firstName = firstName; 
+        this.lastName = lastName; 
+        this.address = address; 
+        this.status = status; 
+        this.workflowStatus = workflowStatus; 
+    } 
+ 
+    public Long getSubCustomerId() { 
+        return subCustomerId; 
+    } 
+ 
+    public void setSubCustomerId(Long subCustomerId) { 
+        this.subCustomerId = subCustomerId; 
+    } 
+ 
+    public String getFirstName() { 
+        return firstName; 
+    } 
+ 
+    public void setFirstName(String firstName) { 
+        this.firstName = firstName; 
+    } 
+ 
+    public String getLastName() { 
+        return lastName; 
+    } 
+ 
+    public void setLastName(String lastName) { 
+        this.lastName = lastName; 
+    } 
+ 
+    public String getAddress() { 
+        return address; 
+    } 
+ 
+    public void setAddress(String address) { 
+        this.address = address; 
+    } 
+ 
+    public String getStatus() { 
+        return status; 
+    } 
+ 
+    public void setStatus(String status) { 
+        this.status = status; 
+    } 
+ 
+    public String getWorkflowStatus() { 
+        return workflowStatus; 
+    } 
+ 
+    public void setWorkflowStatus(String workflowStatus) { 
+        this.workflowStatus = workflowStatus; 
+    } 
 }
