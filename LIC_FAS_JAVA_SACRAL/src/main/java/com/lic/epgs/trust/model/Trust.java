@@ -1,47 +1,8 @@
-public class Trust {
-
-    @Id
-    private Long trustId;
-    private Long documentId;
-    private String role;
-
-    public Trust() {
-    }
-
-    public Trust(Long trustId, Long documentId, String role) {
-        this.trustId = trustId;
-        this.documentId = documentId;
-        this.role = role;
-    }
-
-    public Long getTrustId() {
-        return trustId;
-    }
-
-    public void setTrustId(Long trustId) {
-        this.trustId = trustId;
-    }
-
-    public Long getDocumentId() {
-        return documentId;
-    }
-
-    public void setDocumentId(Long documentId) {
-        this.documentId = documentId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-}
-
 package com.lic.epgs.trust.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -49,41 +10,44 @@ import javax.persistence.Table;
 @Table(name = "trust")
 public class Trust {
 
-    @Id
-    private Long trustId;
-    private Long documentId;
-    private String role;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    public Trust() {
-    }
+	private String name;
+	private String type;
+	private String status;
 
-    public Trust(Long trustId, Long documentId, String role) {
-        this.trustId = trustId;
-        this.documentId = documentId;
-        this.role = role;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Long getTrustId() {
-        return trustId;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setTrustId(Long trustId) {
-        this.trustId = trustId;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public Long getDocumentId() {
-        return documentId;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setDocumentId(Long documentId) {
-        this.documentId = documentId;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public String getRole() {
-        return role;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 }
