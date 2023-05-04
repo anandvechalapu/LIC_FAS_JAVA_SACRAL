@@ -1,36 +1,56 @@
 package com.lic.epgs.subcustomer.subcustomermakercontroller.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class SubCustomerMakerController {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
-	private long subCustomerId;
-	private String makerNote;
-	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public long getSubCustomerId() {
-		return subCustomerId;
-	}
-	public void setSubCustomerId(long subCustomerId) {
-		this.subCustomerId = subCustomerId;
-	}
-	public String getMakerNote() {
-		return makerNote;
-	}
-	public void setMakerNote(String makerNote) {
-		this.makerNote = makerNote;
-	}
+    @Id
+    private Long subCustomerId;
+    private Long contactPersonId;
+    private Boolean contactDetailStatus;
+    private String successMessage;
+    private String errorMessage;
+
+    public Long getSubCustomerId() {
+        return subCustomerId;
+    }
+
+    public void setSubCustomerId(Long subCustomerId) {
+        this.subCustomerId = subCustomerId;
+    }
+
+    public Long getContactPersonId() {
+        return contactPersonId;
+    }
+
+    public void setContactPersonId(Long contactPersonId) {
+        this.contactPersonId = contactPersonId;
+    }
+
+    public Boolean getContactDetailStatus() {
+        return contactDetailStatus;
+    }
+
+    public void setContactDetailStatus(Boolean contactDetailStatus) {
+        this.contactDetailStatus = contactDetailStatus;
+    }
+
+    public String getSuccessMessage() {
+        return successMessage;
+    }
+
+    public void setSuccessMessage(String successMessage) {
+        this.successMessage = successMessage;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
 }
