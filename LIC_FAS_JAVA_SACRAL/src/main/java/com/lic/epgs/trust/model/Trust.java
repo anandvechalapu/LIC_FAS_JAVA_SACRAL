@@ -1,74 +1,38 @@
 package com.lic.epgs.trust.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Id;
 
 @Entity
-@Table(name = "trust")
 public class Trust {
 
-	private String trustId;
-	private String unitCode;
-	private String trustName;
-	private String trustAddress;
-	private String trustPhone;
-	private String trustEmail;
-	private boolean isActive;
+    @Id
+    private Long id;
+    private String role;
+    private String status;
 
-	public String getTrustId() {
-		return trustId;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setTrustId(String trustId) {
-		this.trustId = trustId;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getUnitCode() {
-		return unitCode;
-	}
+    public String getRole() {
+        return role;
+    }
 
-	public void setUnitCode(String unitCode) {
-		this.unitCode = unitCode;
-	}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	public String getTrustName() {
-		return trustName;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setTrustName(String trustName) {
-		this.trustName = trustName;
-	}
-
-	public String getTrustAddress() {
-		return trustAddress;
-	}
-
-	public void setTrustAddress(String trustAddress) {
-		this.trustAddress = trustAddress;
-	}
-
-	public String getTrustPhone() {
-		return trustPhone;
-	}
-
-	public void setTrustPhone(String trustPhone) {
-		this.trustPhone = trustPhone;
-	}
-
-	public String getTrustEmail() {
-		return trustEmail;
-	}
-
-	public void setTrustEmail(String trustEmail) {
-		this.trustEmail = trustEmail;
-	}
-
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
 }
